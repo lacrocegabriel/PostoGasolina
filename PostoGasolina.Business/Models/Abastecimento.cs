@@ -6,6 +6,7 @@ namespace PostoGasolina.Business.Models
     public class Abastecimento : Entity
     {
         public Guid ClienteId { get; set; }
+        public Guid VeiculoId { get; set; }
         public float Litragem { get; set; }
         public decimal ValorLitro { get; set; }
         public TipoCombustivel TipoCombustivel { get; set; }

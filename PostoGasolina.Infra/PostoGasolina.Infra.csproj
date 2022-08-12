@@ -4,4 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore" Version="5.0.17" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PostoGasolina.Business\PostoGasolina.Business.csproj" />
+  </ItemGroup>
+
 </Project>
