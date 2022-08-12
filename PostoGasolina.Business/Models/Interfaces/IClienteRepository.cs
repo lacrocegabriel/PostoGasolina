@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PostoGasolina.Business.Models.Interfaces
 {
-    public interface IClienteRepository<TEntity> : IRepository<Cliente>
+    public interface IClienteRepository : IRepository<Cliente>
     {
         Task<Cliente> ObterClienteVeiculos(Guid id);
         Task<Cliente> ObterClienteAbastecimentos(Guid id);

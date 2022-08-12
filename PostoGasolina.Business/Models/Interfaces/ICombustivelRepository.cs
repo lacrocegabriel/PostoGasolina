@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PostoGasolina.Business.Models.Interfaces
 {
-    public interface ICombustivelRepository<TEntity> : IRepository<Combustivel>
+    public interface ICombustivelRepository : IRepository<Combustivel>
     {
         Task<Combustivel> ObterSaldoCombustivel(Guid id);
     }

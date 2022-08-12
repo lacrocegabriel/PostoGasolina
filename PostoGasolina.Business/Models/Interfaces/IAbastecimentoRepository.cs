@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace PostoGasolina.Business.Models.Interfaces
 {
-    public interface IAbastecimentoRepository<TEntity> : IRepository<Abastecimento>
+    public interface IAbastecimentoRepository : IRepository<Abastecimento>
     {
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorVeiculo(Guid veiculoId);
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorCliente(Guid clienteid);
-        Task<IEnumerable<Abastecimento>> ObterAbastecimentosClienteVeiculo();
+        Task<IEnumerable<Abastecimento>> ObterAbastecimentosCliente();
+        Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculo();
+        Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente();
 
     }
 }

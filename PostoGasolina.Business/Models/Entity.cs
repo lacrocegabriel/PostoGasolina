@@ -9,6 +9,6 @@ namespace PostoGasolina.Business.Models
         {
             Id = Guid.NewGuid();
         }
-        public Guid Id { get; }
+        public Guid Id { get; set; }
     }
 }
