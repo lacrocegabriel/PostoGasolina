@@ -2,7 +2,7 @@ using System;
 
 namespace PostoGasolina.App.Models
 {
-    public class ErrorViewModel
+    public class Abastecimento
     {
         public string RequestId { get; set; }
 
