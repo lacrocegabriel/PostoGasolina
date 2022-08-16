@@ -1,8 +1,8 @@
 using System;
 
-namespace PostoGasolina.App.Models
+namespace PostoGasolina.App.ViewModels
 {
-    public class Abastecimento
+    public class Error
     {
         public string RequestId { get; set; }
 

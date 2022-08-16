@@ -15,6 +15,8 @@ namespace PostoGasolina.App.ViewModels
         public DateTime DataAbastecimento { get; set; }
         public ClienteViewModel Cliente { get; set; }
         public VeiculoViewModel Veiculo { get; set; }
-        
+        public Guid ClienteId { get; set; }
+        public Guid VeiculoId { get; set; }
+
     }
 }

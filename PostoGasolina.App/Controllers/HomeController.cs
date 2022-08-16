@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PostoGasolina.App.Models;
+using PostoGasolina.App.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,7 +31,7 @@ namespace PostoGasolina.App.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new Abastecimento { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new Error { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

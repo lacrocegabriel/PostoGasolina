@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PostoGasolina.App.ViewModels;
 
 namespace PostoGasolina.App.Data
 {
@@ -12,5 +13,6 @@ namespace PostoGasolina.App.Data
             : base(options)
         {
         }
+        
     }
 }

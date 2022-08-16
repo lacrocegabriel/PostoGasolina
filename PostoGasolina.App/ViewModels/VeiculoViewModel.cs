@@ -18,6 +18,7 @@ namespace PostoGasolina.App.ViewModels
         public bool Ativo { get; set; }
         public ClienteViewModel Cliente { get; set; }
         public IEnumerable<AbastecimentoViewModel> Abastecimentos { get; set; }
-        
+        public Guid ClienteId { get; set; }
+
     }
 }
