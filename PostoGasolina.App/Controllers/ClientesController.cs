@@ -18,9 +18,23 @@ namespace PostoGasolina.App.Controllers
         private readonly IClienteRepository _clienteRepository;
         private readonly IMapper _mapper;
 
+        public ClientesController(IClienteRepository clienteRepository, 
+                                  IMapper mapper)
+        {
+            _clienteRepository = clienteRepository;
+            _mapper = mapper;
+        }
+
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos()));
+            List<ClienteViewModel> a = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos()).ToList();
+
+            return Json(new
+            {
+                data = a,
+                success = true
+            });
+            //return View(_mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos()));
         }
 
         public async Task<IActionResult> Details(Guid id)

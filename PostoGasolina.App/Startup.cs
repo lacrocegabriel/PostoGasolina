@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PostoGasolina.App.Data;
+using PostoGasolina.Business.Models.Interfaces;
 using PostoGasolina.Infra.Context;
+using PostoGasolina.Infra.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +44,12 @@ namespace PostoGasolina.App
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<PostoDbContext>();
+            services.AddScoped<IAbastecimentoRepository, AbastecimentoRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            services.AddScoped<ICombustivelRepository, CombustivelRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

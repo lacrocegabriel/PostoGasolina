@@ -27,7 +27,14 @@ namespace PostoGasolina.App.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterTodos()));
+            List<VeiculoViewModel> a = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterTodos()).ToList();
+
+            return Json(new
+            {
+                data = a,
+                success = true
+            });
+            //return View(_mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterTodos()));
         }
 
         public async Task<IActionResult> Details(Guid id)

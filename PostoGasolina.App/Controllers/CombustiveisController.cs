@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PostoGasolina.App.Data;
 using PostoGasolina.App.ViewModels;
 using PostoGasolina.Business.Models;
@@ -27,7 +28,15 @@ namespace PostoGasolina.App.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<CombustivelViewModel>>(await _combustivelRepository.ObterTodos()));
+            List<CombustivelViewModel> a = _mapper.Map<IEnumerable<CombustivelViewModel>>(await _combustivelRepository.ObterTodos()).ToList();
+
+            return Json(new
+            {
+                data = a,
+                success = true
+            });
+
+            //return View(_mapper.Map<IEnumerable<CombustivelViewModel>>(await _combustivelRepository.ObterTodos()));
         }
 
         public async Task<IActionResult> Details(Guid id)
