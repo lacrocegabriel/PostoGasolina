@@ -7,16 +7,17 @@
     columns: [
         {
             text: 'Id',
-            dataIndex: 'id'
-        },
-        {
-            text: 'Marca',
-            dataIndex: 'marca',
-            flex: 1
+            dataIndex: 'id',
+            hidden: true
         },
         {
             text: 'Modelo',
-            dataIndex: 'modelo'
+            dataIndex: 'modelo',
+            flex: 1
+        },
+        {
+            text: 'Marca',
+            dataIndex: 'marca'
         },
         {
             text: 'Ano',

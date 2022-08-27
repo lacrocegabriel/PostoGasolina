@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PostoGasolina.Business.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PostoGasolina.App.ViewModels
 {
+    [JsonObject(IsReference = true)]
     public class AbastecimentoViewModel
     {
         [Key]

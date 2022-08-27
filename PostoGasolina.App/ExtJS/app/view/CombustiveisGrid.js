@@ -7,7 +7,8 @@
     columns: [
         {
             text: 'Id',
-            dataIndex: 'id'
+            dataIndex: 'id',
+            hidden: true
         },
         {
             text: 'Tipo Combustivel',

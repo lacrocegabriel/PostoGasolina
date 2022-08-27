@@ -12,6 +12,10 @@ namespace PostoGasolina.Infra.Context
     {
         public PostoDbContext(DbContextOptions options) : base(options)
         {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            ChangeTracker.AutoDetectChangesEnabled = false;
+            
+            
 
         }
 

@@ -4,10 +4,27 @@
     alias: 'widget.abastecimentosgrid',
 
     store: 'PostoGasolina.store.Abastecimentos',
+
     columns: [
         {
             text: 'Id',
-            dataIndex: 'id'
+            dataIndex: 'id',
+            hidden: true
+        },
+        {
+            text: 'Cliente',
+            dataIndex: 'cliente.nome',
+            flex: 1
+        },
+        {
+            text: 'Documento',
+            dataIndex: 'cliente.documento',
+            flex: 1
+        },
+        {
+            text: 'Veiculo',
+            dataIndex: 'veiculo.modelo',
+            flex: 1
         },
         {
             text: 'Litragem',
@@ -25,7 +42,12 @@
         {
             text: 'Data Abastecimento',
             dataIndex: 'dataAbastecimento'
+        },
+        {
+            text: 'Valor Total',
+            dataIndex: 'total'
         }
+        
     ]
 
 });

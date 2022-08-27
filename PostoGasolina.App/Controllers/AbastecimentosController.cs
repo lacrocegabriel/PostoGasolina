@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PostoGasolina.App.Data;
 using PostoGasolina.App.ViewModels;
 using PostoGasolina.Business.Models;
@@ -26,14 +29,19 @@ namespace PostoGasolina.App.Controllers
         }
 
         public async Task<IActionResult> Index()
+        
         {
-            List<AbastecimentoViewModel> a = _mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterTodos()).ToList();
 
-            return Json(new
-            {
-                data = a,
-                success = true
-            });
+            List<AbastecimentoViewModel> a = _mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterAbastecimentosVeiculoCliente()).ToList();
+
+            var json = JsonConvert.SerializeObject(a);
+           
+            return Json(a);
+            //return Json(new
+            //{
+            //    data = a,
+            //    success = true
+            //});
             //return View(_mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterTodos()));
         }
 
