@@ -9,6 +9,15 @@
     autoShow: true,
     items: [
         {
+            title: 'Abastecimentos',
+
+            items: [{
+                xtype: 'abastecimentosgrid',
+                layout: 'fit'
+            }],
+            itemId: 't3'
+        },
+        {
             title: 'Clientes',
 
             items: [{
@@ -22,25 +31,16 @@
 
             items: [{
                 xtype: 'veiculosgrid',
-                layout: 'fit',
+                layout: 'fit'
             }],
             itemId: 't2'
-        },
-        {
-            title: 'Abastecimentos',
-
-            items: [{
-                xtype: 'abastecimentosgrid',
-                layout: 'fit',
-            }],
-            itemId: 't3'
         },
         {
             title: 'Combustiveis',
 
             items: [{
                 xtype: 'combustiveisgrid',
-                layout: 'fit',
+                layout: 'fit'
             }],
             itemId: 't4'
         }

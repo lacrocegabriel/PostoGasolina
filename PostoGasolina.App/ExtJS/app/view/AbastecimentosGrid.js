@@ -5,6 +5,8 @@
 
     store: 'PostoGasolina.store.Abastecimentos',
 
+    layout: 'fit',
+
     columns: [
         {
             text: 'Id',
@@ -48,6 +50,34 @@
             dataIndex: 'total'
         }
         
+    ],
+
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Adicionar'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Editar'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Excluir'
+                }
+            ]
+        },
+        {
+            xtype: 'pagingtoolbar',
+            store: 'PostoGasolina.store.Abastecimentos',
+            dock: 'top',
+            displayInfo: true,
+            emptyMsg: 'Nenhum registro encontrado'
+        }
     ]
 
 });

@@ -2,13 +2,15 @@
     extend: 'Ext.data.Model',
 
     fields: [
-        { name: 'id', type: 'guid' },
+        { name: 'id' },
         { name: 'marca', type: 'string' },
         { name: 'modelo', type: 'string' },
         { name: 'ano', type: 'string' },
         { name: 'placa', type: 'string' },
         { name: 'tipoCombustivel', type: 'int'},
-        { name: 'ativo', type: 'bool' }
+        { name: 'ativo', type: 'bool' },
+        { name: 'cliente.nome', mapping: 'cliente.nome' },
+        { name: 'cliente.documento', mapping: 'cliente.documento' }
     ]
 
 });

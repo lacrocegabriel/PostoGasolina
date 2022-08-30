@@ -21,6 +21,7 @@ Ext.define('PostoGasolina.controller.Home', {
         'PostoGasolina.view.CombustiveisGrid',
         'PostoGasolina.view.ClientesGrid',
         'PostoGasolina.view.AbastecimentosGrid',
+        'PostoGasolina.view.AbastecimentosForm',
         'PostoGasolina.view.VeiculosGrid'
         
     ],
@@ -30,8 +31,8 @@ Ext.define('PostoGasolina.controller.Home', {
             "menutree": {
                 itemclick: this.onAddClick
             },
-             "combustiveisgrid": {
-                 render: this.onGridRender
+            "combustiveisgrid": {
+                render: this.onGridRender
             },
             "clientesgrid": {
                 render: this.onGridRender
@@ -44,7 +45,14 @@ Ext.define('PostoGasolina.controller.Home', {
             },
             "tabcombustiveis": {
                 close: this.onTabRender
+            },
+            "combobox#cbcliente": {
+                render: this.onFormRender
             }
+            //,
+            //"combobox#cbcliente": {
+            //    select: this.onAddClick
+            //}
             //"contatosgrid button#delete": {
             //    click: this.onDeleteClick
             //},
@@ -58,18 +66,12 @@ Ext.define('PostoGasolina.controller.Home', {
     onGridRender: function (grid, eOpts) {
         grid.getStore().load();
     },
-    onAddClick: function (tree,record, item, index, e, eOpts) {
+    onFormRender: function (combo, eOpts) {
+        combo.getStore().load();
+    },
+    onAddClick: function (combo, records, eOpts) {
 
-        var id = record.getId();
-
-        if (id == 'c1')
-        {
-            var tab = Ext.create('PostoGasolina.view.CombustiveisTab');
-
-            var obj = tab.queryById('t1')
-
-            obj.doAutoRender();
-        }
+        console.log(records);
         
     },
     onTabRender: function (tab, eOpts) {

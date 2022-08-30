@@ -11,6 +11,16 @@
             hidden: true
         },
         {
+            text: 'Cliente',
+            dataIndex: 'cliente.nome',
+            flex: 1
+        },
+        {
+            text: 'Documento',
+            dataIndex: 'cliente.documento',
+            flex: 1
+        },
+        {
             text: 'Modelo',
             dataIndex: 'modelo',
             flex: 1
