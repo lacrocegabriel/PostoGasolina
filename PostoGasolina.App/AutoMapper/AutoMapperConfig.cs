@@ -10,7 +10,7 @@ namespace PostoGasolina.App.AutoMapper
         {
             CreateMap<Cliente,ClienteViewModel>().ReverseMap();
             CreateMap<Veiculo,VeiculoViewModel>().ReverseMap();
-            CreateMap<Combustivel,CombustivelViewModel>().ReverseMap();
+            //CreateMap<Combustivel,CombustivelViewModel>().ReverseMap();
             CreateMap<Abastecimento,AbastecimentoViewModel>().ReverseMap();
 
         }

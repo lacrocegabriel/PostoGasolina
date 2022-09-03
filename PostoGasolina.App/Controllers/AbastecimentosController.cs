@@ -63,12 +63,15 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AbastecimentoViewModel abastecimentoViewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string data)
         {
+
+            var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
+
             if (ModelState.IsValid)
             {
-                var abastecimento = _mapper.Map<Abastecimento>(abastecimentoViewModel);
+                var abastecimento = _mapper.Map<Abastecimento>(json);
 
                 await _abastecimentoRepository.Adicionar(abastecimento);
             }
@@ -89,12 +92,15 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(AbastecimentoViewModel abastecimentoViewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string data)
         {
+
+            var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
+
             if (ModelState.IsValid)
             {
-                var abastecimento = _mapper.Map<Abastecimento>(abastecimentoViewModel);    
+                var abastecimento = _mapper.Map<Abastecimento>(json);    
 
                 await _abastecimentoRepository.Atualizar(abastecimento);
             }
@@ -115,17 +121,20 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string data)
         {
-            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(id));
+
+            var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
+
+            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(json.Id));
 
             if (abastecimentoViewModel == null)
             {
                 return NotFound();
             }
 
-            await _abastecimentoRepository.Remover(id);
+            await _abastecimentoRepository.Remover(json.Id);
 
             return RedirectToAction("Index");
         }

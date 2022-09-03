@@ -51,11 +51,6 @@ namespace PostoGasolina.App.Controllers
                     success = true
                 });
             }
-
-
-            
-
-
             //return View(_mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterTodos()));
         }
 

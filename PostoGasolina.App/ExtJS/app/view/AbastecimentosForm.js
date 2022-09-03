@@ -1,13 +1,14 @@
-﻿var groupStore = Ext.create('PostoGasolina.store.Veiculos')
+﻿var groupStore = Ext.create('PostoGasolina.store.Veiculos');
 
 Ext.define('PostoGasolina.view.AbastecimentosForm', {
 
     extend: 'Ext.window.Window',
     alias: 'widget.abastecimentosform',
 
-    height: 300,
+    height: 275,
     width: 450,
     layout: 'fit',
+    autoShow: true,
 
     items: [
         {
@@ -20,6 +21,7 @@ Ext.define('PostoGasolina.view.AbastecimentosForm', {
                 {
                     xtype: 'combobox',
                     fieldLabel: 'Cliente',
+                    name: 'clienteid',
                     store: 'PostoGasolina.store.Clientes',
                     queryMode: 'local',
                     displayField: 'nome',
@@ -28,26 +30,25 @@ Ext.define('PostoGasolina.view.AbastecimentosForm', {
                     editable: false,
                     listeners: {
                         change: function (combo, value) {
-                            console.log(value);
                             groupStore.load({
                                 params: {
-                                    data: value,
-                                    datas: '1234'
+                                    data: value
                                 }
                             });
                         }
                     }
-                    
                 },
                 {
                     xtype: 'combobox',
                     fieldLabel: 'Veiculo',
+                    name:'veiculoid',
                     store: groupStore,
                     queryMode: 'local',
                     displayField: 'modelo',
                     valueField: 'id',
-                    editable: false
-                    
+                    editable: false,
+                    itemId: 'cbveiculo'
+
                 },
                 {
                     xtype: 'textfield',
@@ -63,38 +64,36 @@ Ext.define('PostoGasolina.view.AbastecimentosForm', {
                     xtype: 'textfield',
                     name: 'tipoCombustivel',
                     fieldLabel: 'Tipo Combustivel'
+                },
+                {
+                    xtype: 'datefield',
+                    anchor: '100%',
+                    name: 'dataAbastecimento',
+                    fieldLabel: 'Data Abastecimento'
+                }
+            ]
+        }
+    ],
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            dock: 'bottom',
+            layout: {
+                type: 'hbox',
+                pack: 'end'
+            },
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Salvar',
+                    itemId:'save'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Cancelar',
+                    itemId: 'cancel'
                 }
             ]
         }
     ]
-    //,
-
-    //dockedItems: [
-    //    {
-    //        xtype: 'toolbar',
-    //        dock: 'top',
-    //        items: [
-    //            {
-    //                xtype: 'button',
-    //                text: 'Adicionar'
-    //            },
-    //            {
-    //                xtype: 'button',
-    //                text: 'Editar'
-    //            },
-    //            {
-    //                xtype: 'button',
-    //                text: 'Excluir'
-    //            }
-    //        ]
-    //    },
-    //    {
-    //        xtype: 'pagingtoolbar',
-    //        store: 'PostoGasolina.store.Abastecimentos',
-    //        dock: 'top',
-    //        displayInfo: true,
-    //        emptyMsg: 'Nenhum registro encontrado'
-    //    }
-    //]
-
 });

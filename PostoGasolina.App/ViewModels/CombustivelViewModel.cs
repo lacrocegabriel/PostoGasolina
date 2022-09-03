@@ -8,7 +8,7 @@ namespace PostoGasolina.App.ViewModels
     {
         [Key]
         public Guid Id { get; set; }
-        public TipoCombustivel TipoCombustivel { get; set; }
+        public TipoCombustivelViewModel TipoCombustivel { get; set; }
         public decimal Valor { get; set; }
     }
 }

@@ -15,17 +15,17 @@
         },
         {
             text: 'Cliente',
-            dataIndex: 'cliente.nome',
+            dataIndex: 'cliente_nome',
             flex: 1
         },
         {
             text: 'Documento',
-            dataIndex: 'cliente.documento',
+            dataIndex: 'cliente_documento',
             flex: 1
         },
         {
             text: 'Veiculo',
-            dataIndex: 'veiculo.modelo',
+            dataIndex: 'veiculo_modelo',
             flex: 1
         },
         {
@@ -59,15 +59,18 @@
             items: [
                 {
                     xtype: 'button',
-                    text: 'Adicionar'
+                    text: 'Adicionar',
+                    itemId: 'add'
                 },
                 {
                     xtype: 'button',
-                    text: 'Editar'
+                    text: 'Editar',
+                    itemId: 'edit'
                 },
                 {
                     xtype: 'button',
-                    text: 'Excluir'
+                    text: 'Excluir',
+                    itemId: 'delete'
                 }
             ]
         },

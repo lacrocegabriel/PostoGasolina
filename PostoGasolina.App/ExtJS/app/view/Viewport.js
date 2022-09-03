@@ -8,6 +8,7 @@ Ext.define('PostoGasolina.view.Viewport', {
         'PostoGasolina.view.ClientesGrid',
         'PostoGasolina.view.AbastecimentosGrid',
         'PostoGasolina.view.AbastecimentosForm',
+        //'PostoGasolina.view.AbastecimentosWindow',
         'PostoGasolina.view.VeiculosGrid'
     ],
 

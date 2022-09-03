@@ -9,7 +9,7 @@
             create: '/Abastecimentos/Create',
             read: '/Abastecimentos/Index',
             update: '/Abastecimentos/Edit',
-            destroy: '/Abastecimentos/DeleteConfirmed'
+            destroy: '/Abastecimentos/Delete'
         },
         
         reader: {

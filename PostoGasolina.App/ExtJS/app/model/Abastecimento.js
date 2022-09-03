@@ -2,20 +2,26 @@
     extend: 'Ext.data.Model',
 
     fields: [
-        { name: 'id'},
-        { name: 'litragem'},
-        { name: 'valorLitro'},
-        { name: 'tipoCombustivel'},
-        { name: 'dataAbastecimento' },
-        { name: 'cliente.nome', mapping: 'cliente.nome' },
-        { name: 'cliente.documento', mapping: 'cliente.documento' },
-        { name: 'veiculo.modelo', mapping: 'veiculo.modelo' },
+        { name: 'id', type: 'guid' },
+        { name: 'litragem', type: 'decimal' },
+        { name: 'valorLitro', type: 'decimal'},
+        { name: 'tipoCombustivel', type: 'int' },
+        { name: 'dataAbastecimento', type: 'date' },
+        { name: 'clienteid', mapping: 'cliente.id', type: 'guid' },
+        { name: 'cliente_nome', mapping: 'cliente.nome', type: 'string' },
+        { name: 'cliente_documento', mapping: 'cliente.documento', type: 'string' },
+        { name: 'veiculoid', mapping: 'veiculo.id', type: 'guid' },
+        { name: 'veiculo_modelo', mapping: 'veiculo.modelo', type: 'string' },
         {
             name: 'total',
             convert: function (value, record) {
                 value = record.get('litragem') * record.get('valorLitro');
                 return value.toFixed(2) ;
-            }   
+            }, type: 'decimal'   
         }
+    ],
+    associations: [
+        { type: 'hasOne', model: 'Cliente' },
+        { type: 'hasOne', model: 'Veiculo' }
     ]
 });

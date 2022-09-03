@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PostoGasolina.Infra.Context;
 
 namespace PostoGasolina.Infra.Migrations
 {
     [DbContext(typeof(PostoDbContext))]
-    partial class PostoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220902020900_Enum")]
+    partial class Enum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,41 +81,36 @@ namespace PostoGasolina.Infra.Migrations
 
             modelBuilder.Entity("PostoGasolina.Business.Models.TipoCombustivel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdTipoCombustivel")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdTipoCombustivel");
 
                     b.ToTable("TipoCombustivel");
 
                     b.HasData(
                         new
                         {
-                            Id = 0,
+                            IdTipoCombustivel = 0,
                             Name = "Gasolina"
                         },
                         new
                         {
-                            Id = 1,
+                            IdTipoCombustivel = 1,
                             Name = "Etanol"
                         },
                         new
                         {
-                            Id = 2,
+                            IdTipoCombustivel = 2,
                             Name = "DieselS10"
                         },
                         new
                         {
-                            Id = 3,
+                            IdTipoCombustivel = 3,
                             Name = "DieselS500"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Flex"
                         });
                 });
 
