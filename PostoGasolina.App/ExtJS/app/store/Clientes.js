@@ -9,7 +9,7 @@
             create: '/Clientes/Create',
             read: '/Clientes/Index',
             update: '/Clientes/Edit',
-            destroy: '/Clientes/DeleteConfirmed'
+            destroy: '/Clientes/Delete'
         },
         
         reader: {

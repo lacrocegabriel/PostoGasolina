@@ -45,6 +45,37 @@
             text: 'Ativo',
             dataIndex: 'ativo'
         }
+    ],
+
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Adicionar',
+                    itemId: 'add'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Editar',
+                    itemId: 'edit'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Excluir',
+                    itemId: 'delete'
+                }
+            ]
+        },
+        {
+            xtype: 'pagingtoolbar',
+            store: 'PostoGasolina.store.Veiculos',
+            dock: 'top',
+            displayInfo: true,
+            emptyMsg: 'Nenhum registro encontrado'
+        }
     ]
 
 });

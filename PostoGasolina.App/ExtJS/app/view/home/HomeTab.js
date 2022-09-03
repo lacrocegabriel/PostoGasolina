@@ -8,15 +8,7 @@
     plain: true,
     autoShow: true,
     items: [
-        {
-            title: 'Abastecimentos',
-
-            items: [{
-                xtype: 'abastecimentosgrid',
-                layout: 'fit'
-            }],
-            itemId: 't3'
-        },
+        
         {
             title: 'Clientes',
 
@@ -34,6 +26,15 @@
                 layout: 'fit'
             }],
             itemId: 't2'
+        },
+        {
+            title: 'Abastecimentos',
+
+            items: [{
+                xtype: 'abastecimentosgrid',
+                layout: 'fit'
+            }],
+            itemId: 't3'
         }
     ]
 });

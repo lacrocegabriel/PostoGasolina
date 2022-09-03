@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PostoGasolina.App.Data;
 using PostoGasolina.App.ViewModels;
 using PostoGasolina.Business.Models;
@@ -71,9 +72,12 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ClienteViewModel clienteViewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string data)
         {
+
+            var clienteViewModel = JsonConvert.DeserializeObject<ClienteViewModel>(data);
+
             if (ModelState.IsValid)
             {
                 var cliente = _mapper.Map<Cliente>(clienteViewModel);
@@ -96,9 +100,11 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ClienteViewModel clienteViewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string data)
         {
+            var clienteViewModel = JsonConvert.DeserializeObject<ClienteViewModel>(data);
+
             if (ModelState.IsValid)
             {
                 var cliente = _mapper.Map<Cliente>(clienteViewModel);
@@ -122,17 +128,20 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string data)
         {
-            var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
+
+            var result = JsonConvert.DeserializeObject<ClienteViewModel>(data);
+
+            var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(result.Id));
 
             if (clienteViewModel == null)
             {
                 return NotFound();
             }
 
-            await _clienteRepository.Remover(id);
+            await _clienteRepository.Remover(clienteViewModel.Id);
 
             return RedirectToAction("Index");
         }

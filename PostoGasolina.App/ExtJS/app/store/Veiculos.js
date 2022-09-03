@@ -9,7 +9,7 @@
             create: '/Veiculos/Create',
             read: '/Veiculos/Index',
             update: '/Veiculos/Edit',
-            destroy: '/Veiculos/DeleteConfirmed'
+            destroy: '/Veiculos/Delete'
         },
         
         reader: {

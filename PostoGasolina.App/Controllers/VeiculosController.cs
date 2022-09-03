@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PostoGasolina.App.Data;
 using PostoGasolina.App.ViewModels;
 using PostoGasolina.Business.Models;
@@ -66,9 +67,12 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VeiculoViewModel veiculoViewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string data)
         {
+
+            var veiculoViewModel = JsonConvert.DeserializeObject<VeiculoViewModel>(data);
+
             if (ModelState.IsValid)
             {
                 var veiculo = _mapper.Map<Veiculo>(veiculoViewModel);
@@ -92,9 +96,11 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(VeiculoViewModel veiculoViewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string data)
         {
+            var veiculoViewModel = JsonConvert.DeserializeObject<VeiculoViewModel>(data);
+
             if (ModelState.IsValid)
             {
                 var veiculo = _mapper.Map<Veiculo>(veiculoViewModel);
@@ -118,17 +124,19 @@ namespace PostoGasolina.App.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string data)
         {
-            var veiculoViewModel = _mapper.Map<VeiculoViewModel>(await _veiculoRepository.ObterPorId(id));
+            var result = JsonConvert.DeserializeObject<VeiculoViewModel>(data);
+
+            var veiculoViewModel = _mapper.Map<VeiculoViewModel>(await _veiculoRepository.ObterPorId(result.Id));
 
             if (veiculoViewModel == null)
             {
                 return NotFound();
             }
 
-            await _veiculoRepository.Remover(id);
+            await _veiculoRepository.Remover(result.Id);
 
             return RedirectToAction("Index");            
         }

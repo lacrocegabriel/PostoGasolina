@@ -22,10 +22,5 @@
                 return value.toFixed(2) ;
             }, type: 'decimal'   
         }
-    ],
-    associations: [
-        { type: 'hasOne', model: 'Cliente' },
-        { type: 'hasOne', model: 'Veiculo' },
-        { type: 'hasOne', model: 'TipoCombustivel' }
     ]
 });

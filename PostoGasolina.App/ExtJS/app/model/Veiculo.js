@@ -8,11 +8,12 @@
         { name: 'ano', type: 'string' },
         { name: 'placa', type: 'string' },
         { name: 'ativo', type: 'bool' },
-        { name: 'clienteid', mapping: 'cliente.nome', type: 'guid' },
+        { name: 'clienteid', mapping: 'cliente.id', type: 'guid' },
         { name: 'cliente_nome', mapping: 'cliente.nome', type: 'string' },
         { name: 'cliente_documento', mapping: 'cliente.documento', type: 'string' },
-        { name: 'tipoCombustivelid', type: 'int' },
-        { name: 'tipoCombustivel_descricao', mapping: 'tipoCombustivel.descricao', type: 'string' }
+        { name: 'tipoCombustivelid', mapping: 'tipoCombustivel.id', type: 'int' }, 
+        { name: 'tipoCombustivel_descricao', mapping: 'tipoCombustivel.descricao', type: 'string' },
+        { name: 'tipoCombustivel', mapping: function (o) { return o.tipoCombustivel ? o.tipoCombustivel : null; } }
     ]
 
 });
