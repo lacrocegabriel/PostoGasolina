@@ -34,15 +34,6 @@
                 layout: 'fit'
             }],
             itemId: 't2'
-        },
-        {
-            title: 'Combustiveis',
-
-            items: [{
-                xtype: 'combustiveisgrid',
-                layout: 'fit'
-            }],
-            itemId: 't4'
         }
     ]
 });

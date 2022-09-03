@@ -16,11 +16,13 @@ namespace PostoGasolina.Infra.Mappings
             builder.Property(a => a.ValorLitro)
                 .IsRequired();
 
-            builder.Property(a => a.IdTipoCombustivel)
+            builder.Property(a => a.TipoCombustivelId)
                 .IsRequired();
 
             builder.Property(a => a.DataAbastecimento)
                 .IsRequired();
+
+            
 
             builder.ToTable("Abastecimentos");
         }

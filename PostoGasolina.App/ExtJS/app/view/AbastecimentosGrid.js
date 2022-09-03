@@ -39,7 +39,7 @@
         },
         {
             text: 'Tipo Combustivel',
-            dataIndex: 'tipoCombustivel'
+            dataIndex: 'tipocombustivel_descricao'
         },
         {
             text: 'Data Abastecimento',

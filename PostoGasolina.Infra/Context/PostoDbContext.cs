@@ -36,12 +36,12 @@ namespace PostoGasolina.Infra.Context
 
             modelBuilder
             .Entity<Abastecimento>()
-            .Property(e => e.IdTipoCombustivel)
+            .Property(e => e.TipoCombustivelId)
             .HasConversion<int>();
 
             modelBuilder
             .Entity<Veiculo>()
-            .Property(e => e.IdTipoCombustivel)
+            .Property(e => e.TipoCombustivelId)
             .HasConversion<int>();
 
             modelBuilder
@@ -56,7 +56,7 @@ namespace PostoGasolina.Infra.Context
                     .Select(e => new TipoCombustivel()
                     {
                         Id = e,
-                        Name = e.ToString()
+                        Descricao = e.ToString()
                     })
             );
         }

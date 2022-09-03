@@ -11,8 +11,8 @@ namespace PostoGasolina.Business.Models
         public string Modelo { get; set; }
         public int Ano { get; set; }
         public string Placa { get; set; }
-        public IdTipoCombustivel IdTipoCombustivel { get; set; }
-        //public TipoCombustivel TipoCombustivel { get; set; }
+        public IdTipoCombustivel TipoCombustivelId { get; set; }
+        public TipoCombustivel TipoCombustivel { get; set; }
         public bool Ativo { get; set; }
         public Cliente Cliente { get; set; }
         public IEnumerable<Abastecimento> Abastecimentos { get; set; }

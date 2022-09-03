@@ -4,7 +4,7 @@ namespace PostoGasolina.App.ViewModels
 {
     public class TipoCombustivelViewModel
     {
-        public IdTipoCombustivel IdTipoCombustivel { get; set; }
-        public string Name { get; set; }
+        public IdTipoCombustivel Id { get; set; }
+        public string Descricao { get; set; }
     }
 }

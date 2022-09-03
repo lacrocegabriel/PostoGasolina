@@ -12,6 +12,8 @@
         { name: 'cliente_documento', mapping: 'cliente.documento', type: 'string' },
         { name: 'veiculoid', mapping: 'veiculo.id', type: 'guid' },
         { name: 'veiculo_modelo', mapping: 'veiculo.modelo', type: 'string' },
+        { name: 'tipoCombustivelid', type: 'int' }, 
+        { name: 'tipocombustivel_descricao', mapping: 'tipoCombustivel.descricao', type: 'string' }, 
         {
             name: 'total',
             convert: function (value, record) {

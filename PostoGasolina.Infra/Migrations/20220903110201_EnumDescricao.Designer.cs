@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PostoGasolina.Infra.Context;
 
 namespace PostoGasolina.Infra.Migrations
 {
     [DbContext(typeof(PostoDbContext))]
-    partial class PostoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220903110201_EnumDescricao")]
+    partial class EnumDescricao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,11 +33,11 @@ namespace PostoGasolina.Infra.Migrations
                     b.Property<DateTime>("DataAbastecimento")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdTipoCombustivel")
+                        .HasColumnType("int");
+
                     b.Property<float>("Litragem")
                         .HasColumnType("real");
-
-                    b.Property<int>("TipoCombustivelId")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("ValorLitro")
                         .HasColumnType("decimal(18,2)");
@@ -46,8 +48,6 @@ namespace PostoGasolina.Infra.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
-
-                    b.HasIndex("TipoCombustivelId");
 
                     b.HasIndex("VeiculoId");
 
@@ -134,6 +134,9 @@ namespace PostoGasolina.Infra.Migrations
                     b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("IdTipoCombustivel")
+                        .HasColumnType("int");
+
                     b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("VARCHAR(50)");
@@ -146,14 +149,9 @@ namespace PostoGasolina.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(8)");
 
-                    b.Property<int>("TipoCombustivelId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
-
-                    b.HasIndex("TipoCombustivelId");
 
                     b.ToTable("Veiculos");
                 });
@@ -165,19 +163,12 @@ namespace PostoGasolina.Infra.Migrations
                         .HasForeignKey("ClienteId")
                         .IsRequired();
 
-                    b.HasOne("PostoGasolina.Business.Models.TipoCombustivel", "TipoCombustivel")
-                        .WithMany()
-                        .HasForeignKey("TipoCombustivelId")
-                        .IsRequired();
-
                     b.HasOne("PostoGasolina.Business.Models.Veiculo", "Veiculo")
                         .WithMany("Abastecimentos")
                         .HasForeignKey("VeiculoId")
                         .IsRequired();
 
                     b.Navigation("Cliente");
-
-                    b.Navigation("TipoCombustivel");
 
                     b.Navigation("Veiculo");
                 });
@@ -189,14 +180,7 @@ namespace PostoGasolina.Infra.Migrations
                         .HasForeignKey("ClienteId")
                         .IsRequired();
 
-                    b.HasOne("PostoGasolina.Business.Models.TipoCombustivel", "TipoCombustivel")
-                        .WithMany()
-                        .HasForeignKey("TipoCombustivelId")
-                        .IsRequired();
-
                     b.Navigation("Cliente");
-
-                    b.Navigation("TipoCombustivel");
                 });
 
             modelBuilder.Entity("PostoGasolina.Business.Models.Cliente", b =>

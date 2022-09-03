@@ -7,10 +7,12 @@
         { name: 'modelo', type: 'string' },
         { name: 'ano', type: 'string' },
         { name: 'placa', type: 'string' },
-        { name: 'tipoCombustivel', type: 'int'},
         { name: 'ativo', type: 'bool' },
-        { name: 'cliente.nome', mapping: 'cliente.nome' },
-        { name: 'cliente.documento', mapping: 'cliente.documento' }
+        { name: 'clienteid', mapping: 'cliente.nome', type: 'guid' },
+        { name: 'cliente_nome', mapping: 'cliente.nome', type: 'string' },
+        { name: 'cliente_documento', mapping: 'cliente.documento', type: 'string' },
+        { name: 'tipoCombustivelid', type: 'int' },
+        { name: 'tipoCombustivel_descricao', mapping: 'tipoCombustivel.descricao', type: 'string' }
     ]
 
 });

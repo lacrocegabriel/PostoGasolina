@@ -30,7 +30,7 @@ namespace PostoGasolina.App.Controllers
 
             if (data == null)
             {
-                List<VeiculoViewModel> a = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterTodos()).ToList();
+                List<VeiculoViewModel> a = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterVeiculosCliente()).ToList();
 
                 return Json(new
                 {

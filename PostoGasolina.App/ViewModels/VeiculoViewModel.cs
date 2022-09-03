@@ -16,7 +16,7 @@ namespace PostoGasolina.App.ViewModels
         public string Modelo { get; set; }
         public int Ano { get; set; }
         public string Placa { get; set; }
-        public IdTipoCombustivel IdTipoCombustivel { get; set; }
+        public IdTipoCombustivel TipoCombustivelId { get; set; }
         public TipoCombustivelViewModel TipoCombustivel { get; set; }
         public bool Ativo { get; set; }
         public ClienteViewModel Cliente { get; set; }

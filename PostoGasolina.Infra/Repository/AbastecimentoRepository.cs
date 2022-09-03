@@ -46,6 +46,7 @@ namespace PostoGasolina.Infra.Repository
             return await Db.Abastecimentos.AsNoTracking()
                 .Include(a => a.Cliente)
                 .Include(a => a.Veiculo)
+                .Include(a => a.TipoCombustivel)
                 .OrderBy(a => a.DataAbastecimento)
                 .ToListAsync();
         }

@@ -2,27 +2,25 @@ Ext.define('PostoGasolina.controller.Home', {
     extend: 'Ext.app.Controller',
 
     models: [
-        'PostoGasolina.model.Combustivel',
         'PostoGasolina.model.Cliente',
         'PostoGasolina.model.Abastecimento',
-        'PostoGasolina.model.Veiculo'
+        'PostoGasolina.model.Veiculo',
+        'PostoGasolina.model.TipoCombustivel'
     ],
 
     stores: [
-        'PostoGasolina.store.Combustiveis',
         'PostoGasolina.store.Clientes',
         'PostoGasolina.store.Abastecimentos',
-        'PostoGasolina.store.Veiculos'
+        'PostoGasolina.store.Veiculos',
+        'PostoGasolina.store.TipoCombustiveis'
     ],
 
     views: [
         'PostoGasolina.view.Home',
         'PostoGasolina.view.HomeTab',
-        'PostoGasolina.view.CombustiveisGrid',
         'PostoGasolina.view.ClientesGrid',
         'PostoGasolina.view.AbastecimentosGrid',
         'PostoGasolina.view.AbastecimentosForm',
-        //'PostoGasolina.view.AbastecimentosWindow',
         'PostoGasolina.view.VeiculosGrid'
         
     ],
@@ -31,9 +29,6 @@ Ext.define('PostoGasolina.controller.Home', {
         this.control({
             "menutree": {
                 itemclick: this.onAddClick
-            },
-            "combustiveisgrid": {
-                render: this.onGridRender
             },
             "clientesgrid": {
                 render: this.onGridRender
@@ -62,9 +57,6 @@ Ext.define('PostoGasolina.controller.Home', {
             },
             "veiculosgrid": {
                 render: this.onGridRender
-            },
-            "tabcombustiveis": {
-                close: this.onTabRender
             }
         });
     },
@@ -100,11 +92,15 @@ Ext.define('PostoGasolina.controller.Home', {
 
         var combov = form.down('combo#cbveiculo');
 
+        var combot = form.down('combo#cbtipoCombustivel');
+
         form.loadRecord(record);
 
         comboc.setValue(record.data.clienteid);
 
         combov.setValue(record.data.veiculoid);
+
+        combot.setValue(record.data.tipoCombustivelid);
     },
     onEditClick: function (grid, record, item, index, e, eOpts) {
 
@@ -118,11 +114,15 @@ Ext.define('PostoGasolina.controller.Home', {
 
         var combov = form.down('combo#cbveiculo');
 
+        var combot = form.down('combo#cbtipoCombustivel');
+
         form.loadRecord(record);
 
         comboc.setValue(record.data.clienteid);
         
         combov.setValue(record.data.veiculoid);
+
+        combot.setValue(record.data.tipoCombustivelid);
     },
     onCancelClick: function (btn, e, eOpts) {
         var win = btn.up('window');
@@ -154,6 +154,7 @@ Ext.define('PostoGasolina.controller.Home', {
                 tipoCombustivel: values.tipoCombustivel,
                 clienteid: values.clienteid,
                 veiculoid: values.veiculoid,
+                tipoCombustivelid: values.tipoCombustivelid,
                 dataAbastecimento: values.dataAbastecimento
             });
 

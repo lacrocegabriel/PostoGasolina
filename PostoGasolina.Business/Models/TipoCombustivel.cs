@@ -10,6 +10,6 @@ namespace PostoGasolina.Business.Models
     {
         [Key]
         public IdTipoCombustivel Id { get; set; }
-        public string Name { get; set; }
+        public string Descricao { get; set; }
     }
 }

@@ -5,8 +5,7 @@
 
 //namespace PostoGasolina.Business.Models.Interfaces
 //{
-//    public interface ICombustivelRepository : IRepository<TipoCombustivel>
+//    public interface ITipoCombustivelRepository : IRepository<TipoCombustivel>
 //    {
-//        Task<TipoCombustivel> ObterSaldoCombustivel(Guid id);
 //    }
 //}

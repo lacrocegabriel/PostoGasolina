@@ -14,7 +14,7 @@ namespace PostoGasolina.App.ViewModels
         public Guid Id { get; set; }
         public float Litragem { get; set; }
         public decimal ValorLitro { get; set; }
-        public IdTipoCombustivel IdTipoCombustivel { get; set; }
+        public IdTipoCombustivel TipoCombustivelId { get; set; }
         public TipoCombustivelViewModel TipoCombustivel { get; set; }
         public DateTime DataAbastecimento { get; set; }
         public ClienteViewModel Cliente { get; set; }

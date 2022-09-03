@@ -19,6 +19,12 @@ Ext.define('PostoGasolina.view.AbastecimentosForm', {
             },
             items: [
                 {
+                    xtype: 'datefield',
+                    anchor: '100%',
+                    name: 'dataAbastecimento',
+                    fieldLabel: 'Data Abastecimento'
+                },
+                {
                     xtype: 'combobox',
                     fieldLabel: 'Cliente',
                     name: 'clienteid',
@@ -51,6 +57,18 @@ Ext.define('PostoGasolina.view.AbastecimentosForm', {
 
                 },
                 {
+                    xtype: 'combobox',
+                    fieldLabel: 'Tipo Combustivel',
+                    name: 'tipoCombustivelid',
+                    store: 'PostoGasolina.store.TipoCombustiveis',
+                    queryMode: 'local',
+                    displayField: 'descricao',
+                    valueField: 'id',
+                    editable: false,
+                    itemId: 'cbtipoCombustivel'
+                    
+                },
+                {
                     xtype: 'textfield',
                     name: 'litragem',
                     fieldLabel: 'Litragem'
@@ -59,18 +77,7 @@ Ext.define('PostoGasolina.view.AbastecimentosForm', {
                     xtype: 'textfield',
                     name: 'valorLitro',
                     fieldLabel: 'Valor Litro'
-                },
-                {
-                    xtype: 'textfield',
-                    name: 'tipoCombustivel',
-                    fieldLabel: 'Tipo Combustivel'
-                },
-                {
-                    xtype: 'datefield',
-                    anchor: '100%',
-                    name: 'dataAbastecimento',
-                    fieldLabel: 'Data Abastecimento'
-                }
+                }                
             ]
         }
     ],
