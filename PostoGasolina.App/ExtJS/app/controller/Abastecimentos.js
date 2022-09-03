@@ -1,16 +1,13 @@
-Ext.define('PostoGasolina.controller.Home', {
+Ext.define('PostoGasolina.controller.Abastecimentos', {
     extend: 'Ext.app.Controller',
 
     models: [
-        'PostoGasolina.model.Cliente',
-        'PostoGasolina.model.Abastecimento',
-        'PostoGasolina.model.Veiculo',
-        'PostoGasolina.model.TipoCombustivel'
+        'PostoGasolina.model.Abastecimento'
     ],
 
     stores: [
-        'PostoGasolina.store.Clientes',
         'PostoGasolina.store.Abastecimentos',
+        'PostoGasolina.store.Clientes',
         'PostoGasolina.store.Veiculos',
         'PostoGasolina.store.TipoCombustiveis'
     ],
@@ -18,21 +15,12 @@ Ext.define('PostoGasolina.controller.Home', {
     views: [
         'PostoGasolina.view.Home',
         'PostoGasolina.view.HomeTab',
-        'PostoGasolina.view.ClientesGrid',
         'PostoGasolina.view.AbastecimentosGrid',
-        'PostoGasolina.view.AbastecimentosForm',
-        'PostoGasolina.view.VeiculosGrid'
-        
+        'PostoGasolina.view.AbastecimentosForm'
     ],
 
     init: function (application) {
         this.control({
-            "menutree": {
-                itemclick: this.onAddClick
-            },
-            "clientesgrid": {
-                render: this.onGridRender
-            },
             "abastecimentosgrid": {
                 render: this.onGridRender
                 ,itemdblclick: this.onEditClick
@@ -41,7 +29,7 @@ Ext.define('PostoGasolina.controller.Home', {
                 click: this.onAddClick
             },
             "abastecimentosgrid button#edit": {
-                click: this.onEditClicks
+                click: this.onBEditClick
             },
             "abastecimentosgrid button#delete": {
                 click: this.onDeleteClick
@@ -54,9 +42,6 @@ Ext.define('PostoGasolina.controller.Home', {
             },
             "abastecimentosform button#save": {
                 click: this.onSaveClick
-            },
-            "veiculosgrid": {
-                render: this.onGridRender
             }
         });
     },
@@ -74,7 +59,7 @@ Ext.define('PostoGasolina.controller.Home', {
         win.setTitle('Adicionar');
         
     },
-    onEditClicks: function (btn, e, eOpts) {
+    onBEditClick: function (btn, e, eOpts) {
 
         var grid = btn.up('grid');
 
@@ -143,6 +128,8 @@ Ext.define('PostoGasolina.controller.Home', {
             store = grid.getStore(),
             toolbar = grid.down('pagingtoolbar');
 
+        
+
         if (record) {
 
             record.set(values);
@@ -164,6 +151,7 @@ Ext.define('PostoGasolina.controller.Home', {
 
         store.sync();
         win.close();
+        toolbar.doRefresh();
     },
     onDeleteClick: function (btn, e, eOpts) {
 

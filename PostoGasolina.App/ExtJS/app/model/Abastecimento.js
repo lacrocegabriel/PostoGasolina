@@ -12,8 +12,9 @@
         { name: 'cliente_documento', mapping: 'cliente.documento', type: 'string' },
         { name: 'veiculoid', mapping: 'veiculo.id', type: 'guid' },
         { name: 'veiculo_modelo', mapping: 'veiculo.modelo', type: 'string' },
-        { name: 'tipoCombustivelid', type: 'int' }, 
+        { name: 'tipoCombustivelid', mapping: 'tipoCombustivel.id', type: 'int' }, 
         { name: 'tipocombustivel_descricao', mapping: 'tipoCombustivel.descricao', type: 'string' }, 
+        { name: 'tipoCombustivel', mapping: function (o) { return o.tipoCombustivel ? o.tipoCombustivel : null; } }, 
         {
             name: 'total',
             convert: function (value, record) {
@@ -24,6 +25,7 @@
     ],
     associations: [
         { type: 'hasOne', model: 'Cliente' },
-        { type: 'hasOne', model: 'Veiculo' }
+        { type: 'hasOne', model: 'Veiculo' },
+        { type: 'hasOne', model: 'TipoCombustivel' }
     ]
 });

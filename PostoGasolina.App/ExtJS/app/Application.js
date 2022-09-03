@@ -11,7 +11,10 @@ Ext.define('PostoGasolina.Application', {
     ],
 
     controllers: [
-        'Home'
+        'Abastecimentos',
+        'Clientes',
+        'Veiculos'
+
     ],
 
     stores: [
