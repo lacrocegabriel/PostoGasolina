@@ -5,9 +5,15 @@ Ext.define('PostoGasolina.Application', {
 
     appFolder: 'ExtJS/app',
 
+
     
    views: [
-        // TODO: add views here
+       //'Home',
+       //'HomeTab',
+       //'Clientes/ClientesGrid',
+       //'Abastecimentos/AbastecimentosForm',
+       //'Abastecimentos/AbastecimentosGrid',
+       //'Veiculos/VeiculosGrid'
     ],
 
     controllers: [
@@ -18,6 +24,6 @@ Ext.define('PostoGasolina.Application', {
     ],
 
     stores: [
-        // TODO: add stores here
+        
     ]
 });

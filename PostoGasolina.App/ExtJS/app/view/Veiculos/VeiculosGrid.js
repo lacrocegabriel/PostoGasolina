@@ -1,4 +1,4 @@
-﻿Ext.define('PostoGasolina.view.VeiculosGrid', {
+﻿Ext.define('PostoGasolina.view.Veiculos.VeiculosGrid', {
 
     extend: 'Ext.grid.Panel',
     alias: 'widget.veiculosgrid',

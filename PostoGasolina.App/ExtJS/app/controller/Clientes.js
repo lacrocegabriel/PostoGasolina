@@ -11,9 +11,9 @@ Ext.define('PostoGasolina.controller.Clientes', {
     ],
 
     views: [
-        'PostoGasolina.view.Home',
-        'PostoGasolina.view.HomeTab',
-        'PostoGasolina.view.ClientesGrid'
+        'PostoGasolina.view.Home.Home',
+        'PostoGasolina.view.Home.HomeTab',
+        'PostoGasolina.view.Clientes.ClientesGrid'
     ],
 
     init: function (application) {

@@ -10,9 +10,9 @@ Ext.define('PostoGasolina.controller.Veiculos', {
     ],
 
     views: [
-        'PostoGasolina.view.Home',
-        'PostoGasolina.view.HomeTab',
-        'PostoGasolina.view.VeiculosGrid'
+        'PostoGasolina.view.Home.Home',
+        'PostoGasolina.view.Home.HomeTab',
+        'PostoGasolina.view.Veiculos.VeiculosGrid'
         
     ],
 

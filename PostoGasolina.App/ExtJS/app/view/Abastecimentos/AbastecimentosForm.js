@@ -1,6 +1,6 @@
 ﻿var groupStore = Ext.create('PostoGasolina.store.Veiculos');
 
-Ext.define('PostoGasolina.view.AbastecimentosForm', {
+Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
 
     extend: 'Ext.window.Window',
     alias: 'widget.abastecimentosform',

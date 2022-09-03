@@ -13,10 +13,10 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
     ],
 
     views: [
-        'PostoGasolina.view.Home',
-        'PostoGasolina.view.HomeTab',
-        'PostoGasolina.view.AbastecimentosGrid',
-        'PostoGasolina.view.AbastecimentosForm'
+        'PostoGasolina.view.Home.Home',
+        'PostoGasolina.view.Home.HomeTab',
+        'PostoGasolina.view.Abastecimentos.AbastecimentosGrid',
+        'PostoGasolina.view.Abastecimentos.AbastecimentosForm'
     ],
 
     init: function (application) {
@@ -54,7 +54,7 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
     },
     onAddClick: function(btn, e, eOpts) {
 
-        var win = Ext.create('PostoGasolina.view.AbastecimentosForm');
+        var win = Ext.create('PostoGasolina.view.Abastecimentos.AbastecimentosForm');
 
         win.setTitle('Adicionar');
         
@@ -67,7 +67,7 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
 
         console.log(record);
 
-        var win = Ext.create('PostoGasolina.view.AbastecimentosForm');
+        var win = Ext.create('PostoGasolina.view.Abastecimentos.AbastecimentosForm');
 
         win.setTitle('Editar');
 
@@ -89,7 +89,7 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
     },
     onEditClick: function (grid, record, item, index, e, eOpts) {
 
-        var win = Ext.create('PostoGasolina.view.AbastecimentosForm');
+        var win = Ext.create('PostoGasolina.view.Abastecimentos.AbastecimentosForm');
 
         win.setTitle('Editar');
 
@@ -128,8 +128,6 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             store = grid.getStore(),
             toolbar = grid.down('pagingtoolbar');
 
-        
-
         if (record) {
 
             record.set(values);
@@ -146,12 +144,12 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             });
 
             store.add(abastecimento);
-            toolbar.doRefresh();
+            
         }
 
         store.sync();
         win.close();
-        toolbar.doRefresh();
+        
     },
     onDeleteClick: function (btn, e, eOpts) {
 

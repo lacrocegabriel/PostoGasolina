@@ -1,4 +1,4 @@
-﻿Ext.define('PostoGasolina.view.HomeTab', {
+﻿Ext.define('PostoGasolina.view.Home.HomeTab', {
     extend: 'Ext.tab.Panel',
 
     alias: 'widget.hometab',

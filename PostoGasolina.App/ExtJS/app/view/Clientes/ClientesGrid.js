@@ -1,4 +1,4 @@
-﻿Ext.define('PostoGasolina.view.ClientesGrid', {
+﻿Ext.define('PostoGasolina.view.Clientes.ClientesGrid', {
 
     extend: 'Ext.grid.Panel',
     alias: 'widget.clientesgrid',

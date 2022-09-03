@@ -1,4 +1,4 @@
-﻿Ext.define('PostoGasolina.view.Home', {
+﻿Ext.define('PostoGasolina.view.Home.Home', {
     title: 'Gas Control',
     extend: 'Ext.panel.Panel',
     alias: 'widget.gascontrolpanel',
