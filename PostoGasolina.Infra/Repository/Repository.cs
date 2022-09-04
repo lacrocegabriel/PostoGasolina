@@ -28,6 +28,11 @@ namespace PostoGasolina.Infra.Repository
             return await DbSet.FindAsync(id);
         }
 
+         public Task<TEntity> ObterPorFiltro(string query)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<TEntity>> ObterTodos(int start, int limit)
         {
             return
@@ -43,11 +48,12 @@ namespace PostoGasolina.Infra.Repository
 
             return total;
         }
-
-        public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate, int start, int limit)
         {
             return await DbSet.AsNoTracking()
                                 .Where(predicate)
+                                .Skip(start)
+                                .Take(limit)
                                 .ToListAsync();
         }
        
@@ -78,5 +84,7 @@ namespace PostoGasolina.Infra.Repository
         {
             Db?.Dispose();
         }
+
+        
     }
 }

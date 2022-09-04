@@ -8,9 +8,10 @@ namespace PostoGasolina.Business.Models.Interfaces
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
         Task<TEntity> ObterPorId(Guid id);
+        Task<TEntity> ObterPorFiltro(string query);
         Task<List<TEntity>> ObterTodos(int start, int limit);
         Task<int> TotalRegistros();
-        Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate, int start, int limit);
         Task Adicionar(TEntity entity);
         Task Atualizar(TEntity entity);
         Task Remover(Guid id);

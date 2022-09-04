@@ -47,7 +47,7 @@ namespace PostoGasolina.App.Controllers
             {
                 Guid id = Guid.Parse(data);
 
-                List<VeiculoViewModel> veiculos = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterVeiculosPorCliente(id)).ToList();
+                List<VeiculoViewModel> veiculos = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterVeiculosPorCliente(id, start, limit)).ToList();
 
                 return Json(new
                 {

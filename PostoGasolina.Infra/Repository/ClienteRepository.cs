@@ -38,5 +38,12 @@ namespace PostoGasolina.Infra.Repository
                 .Include(c => c.Abastecimentos)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
+
+        public async Task<int> TotalRegistrosPorFiltro(string query)
+        {
+            var total = await Db.Clientes.CountAsync(c => c.Nome.Contains(query));
+
+            return total;
+        }
     }
 }

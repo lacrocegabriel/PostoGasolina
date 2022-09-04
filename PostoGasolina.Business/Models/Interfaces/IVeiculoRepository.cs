@@ -9,7 +9,7 @@ namespace PostoGasolina.Business.Models.Interfaces
     {
 
         Task<IEnumerable<Veiculo>> ObterVeiculosCliente(int start, int limit);
-        Task<IEnumerable<Veiculo>> ObterVeiculosPorCliente(Guid clienteId);
+        Task<IEnumerable<Veiculo>> ObterVeiculosPorCliente(Guid clienteId, int start, int limit);
         
         
     }

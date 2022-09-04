@@ -7,8 +7,8 @@ namespace PostoGasolina.Business.Models.Interfaces
 {
     public interface IAbastecimentoRepository : IRepository<Abastecimento>
     {
-        Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorVeiculo(Guid veiculoId);
-        Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorCliente(Guid clienteid);
+        Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorVeiculo(Guid veiculoId, int start, int limit);
+        Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorCliente(Guid clienteid, int start, int limit);
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosCliente();
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculo();
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente(int start, int limit);

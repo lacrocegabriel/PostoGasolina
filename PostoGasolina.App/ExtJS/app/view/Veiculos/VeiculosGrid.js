@@ -55,17 +55,20 @@
                 {
                     xtype: 'button',
                     text: 'Adicionar',
-                    itemId: 'add'
+                    itemId: 'add',
+                    iconCls: 'icon-add'
                 },
                 {
                     xtype: 'button',
                     text: 'Editar',
-                    itemId: 'edit'
+                    itemId: 'edit',
+                    iconCls: 'icon-edit'
                 },
                 {
                     xtype: 'button',
                     text: 'Excluir',
-                    itemId: 'delete'
+                    itemId: 'delete',
+                    iconCls: 'icon-delete'
                 }
             ]
         },
@@ -74,7 +77,10 @@
             store: 'PostoGasolina.store.Veiculos',
             dock: 'bottom',
             displayInfo: true,
-            emptyMsg: 'Nenhum registro encontrado'
+            beforePageText: 'Página',
+            afterPageText: 'de {0}',
+            emptyMsg: 'Nenhum registro encontrado',
+            displayMsg: 'Exibindo: {1} de {2} Veículos'
         }
     ]
 

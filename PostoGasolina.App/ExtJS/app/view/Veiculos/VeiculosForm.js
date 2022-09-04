@@ -3,7 +3,7 @@
     extend: 'Ext.window.Window',
     alias: 'widget.veiculosform',
 
-    height: 290,
+    height: 330,
     width: 450,
     layout: 'fit',
     autoShow: true,
@@ -87,12 +87,14 @@
                 {
                     xtype: 'button',
                     text: 'Salvar',
-                    itemId:'save'
+                    itemId: 'save',
+                    iconCls: 'icon-save'
                 },
                 {
                     xtype: 'button',
                     text: 'Cancelar',
-                    itemId: 'cancel'
+                    itemId: 'cancel',
+                    iconCls: 'icon-reset'
                 }
             ]
         }

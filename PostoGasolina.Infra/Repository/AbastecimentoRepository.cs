@@ -23,9 +23,9 @@ namespace PostoGasolina.Infra.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorCliente(Guid clienteid)
+        public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorCliente(Guid clienteid, int start, int limit)
         {
-            return await Buscar(a => a.ClienteId == clienteid);
+            return await Buscar(a => a.ClienteId == clienteid, start, limit);
         }
 
         public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculo()
@@ -36,9 +36,9 @@ namespace PostoGasolina.Infra.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorVeiculo(Guid veiculoId)
+        public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorVeiculo(Guid veiculoId, int start, int limit)
         {
-            return await Buscar(a => a.VeiculoId == veiculoId);
+            return await Buscar(a => a.VeiculoId == veiculoId, start, limit);
         }
 
         public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente(int start, int limit)

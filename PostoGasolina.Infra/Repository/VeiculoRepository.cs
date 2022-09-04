@@ -26,9 +26,9 @@ namespace PostoGasolina.Infra.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Veiculo>> ObterVeiculosPorCliente(Guid clienteId)
+        public async Task<IEnumerable<Veiculo>> ObterVeiculosPorCliente(Guid clienteId, int start, int limit)
         {
-            return await Buscar(v => v.ClienteId == clienteId);
+            return await Buscar(v => v.ClienteId == clienteId, start, limit);
         }
     }
 }

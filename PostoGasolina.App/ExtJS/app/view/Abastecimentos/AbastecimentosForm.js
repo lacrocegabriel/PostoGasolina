@@ -5,7 +5,7 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
     extend: 'Ext.window.Window',
     alias: 'widget.abastecimentosform',
 
-    height: 275,
+    height: 350,
     width: 450,
     layout: 'fit',
     autoShow: true,
@@ -29,20 +29,31 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     fieldLabel: 'Cliente',
                     name: 'clienteid',
                     store: 'PostoGasolina.store.Clientes',
-                    queryMode: 'local',
+                    queryMode: 'remote',
                     displayField: 'nome',
                     valueField: 'id',
                     itemId: 'cbcliente',
-                    editable: false,
-                    listeners: {
-                        change: function (combo, value) {
-                            groupStore.load({
-                                params: {
-                                    data: value
-                                }
-                            });
-                        }
-                    }
+                    //listeners: {
+                    //    change: function (combo, value) {
+                    //        groupStore.load({
+                    //            params: {
+                    //                data: value
+                    //            }
+                    //        });
+                    //    }
+                    //},
+                    //items: [{
+                    //    xtype: 'pagingtoolbar',
+                    //    store: 'PostoGasolina.store.Clientes',
+                    //    dock: 'bottom',
+                    //    displayInfo: false,
+                    //    beforePageText: '',
+                    //    afterPageText: '{0}',
+                    //    emptyMsg: 'Nenhum registro encontrado',
+                    //    displayMsg: ''
+                    //}]
+                    pageSize: 5,
+                    queryDelay: 1000
                 },
                 {
                     xtype: 'combobox',
@@ -52,7 +63,6 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     queryMode: 'local',
                     displayField: 'modelo',
                     valueField: 'id',
-                    editable: false,
                     itemId: 'cbveiculo'
 
                 },
@@ -64,7 +74,6 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     queryMode: 'local',
                     displayField: 'descricao',
                     valueField: 'id',
-                    editable: false,
                     itemId: 'cbtipoCombustivel'
                     
                 },
@@ -93,12 +102,14 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                 {
                     xtype: 'button',
                     text: 'Salvar',
-                    itemId:'save'
+                    itemId: 'save',
+                    iconCls: 'icon-save'
                 },
                 {
                     xtype: 'button',
                     text: 'Cancelar',
-                    itemId: 'cancel'
+                    itemId: 'cancel',
+                    iconCls: 'icon-reset'
                 }
             ]
         }

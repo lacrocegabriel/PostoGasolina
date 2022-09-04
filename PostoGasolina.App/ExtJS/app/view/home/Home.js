@@ -1,5 +1,8 @@
 ﻿Ext.define('PostoGasolina.view.Home.Home', {
-    title: 'Gas Control',
+
+    iconCls: 'icon-grid',
+
+    title: 'Controle de Abastecimentos',
 
     extend: 'Ext.panel.Panel',
 
