@@ -11,11 +11,10 @@
         
         {
             title: 'Clientes',
-
             items: [{
                 xtype: 'clientesgrid',
-                layout: 'fit'
             }],
+            layout: 'fit',
             itemId: 't1'
         },
         {
@@ -23,8 +22,8 @@
 
             items: [{
                 xtype: 'veiculosgrid',
-                layout: 'fit'
             }],
+            layout: 'fit',
             itemId: 't2'
         },
         {
@@ -32,8 +31,8 @@
 
             items: [{
                 xtype: 'abastecimentosgrid',
-                layout: 'fit'
             }],
+            layout: 'fit',
             itemId: 't3'
         }
     ]

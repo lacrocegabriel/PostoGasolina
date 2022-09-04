@@ -77,7 +77,7 @@
         {
             xtype: 'pagingtoolbar',
             store: 'PostoGasolina.store.Abastecimentos',
-            dock: 'top',
+            dock: 'bottom',
             displayInfo: true,
             emptyMsg: 'Nenhum registro encontrado'
         }

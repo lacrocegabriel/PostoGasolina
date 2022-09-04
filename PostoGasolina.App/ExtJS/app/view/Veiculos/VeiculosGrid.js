@@ -72,7 +72,7 @@
         {
             xtype: 'pagingtoolbar',
             store: 'PostoGasolina.store.Veiculos',
-            dock: 'top',
+            dock: 'bottom',
             displayInfo: true,
             emptyMsg: 'Nenhum registro encontrado'
         }

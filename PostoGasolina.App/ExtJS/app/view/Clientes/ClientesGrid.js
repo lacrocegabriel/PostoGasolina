@@ -5,8 +5,6 @@
 
     store: 'PostoGasolina.store.Clientes',
 
-    autoScroll: true,
-
     columns: [
         {
             text: 'Id',
@@ -57,7 +55,7 @@
         {
             xtype: 'pagingtoolbar',
             store: 'PostoGasolina.store.Clientes',
-            dock: 'top',
+            dock: 'bottom',
             displayInfo: true,
             emptyMsg: 'Nenhum registro encontrado'
         }
