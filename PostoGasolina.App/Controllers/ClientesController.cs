@@ -26,16 +26,19 @@ namespace PostoGasolina.App.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index(string data)
+        public async Task<IActionResult> Index(string data,int start, int limit)
         {
 
             if (data == null)
             {
-                List<ClienteViewModel> a = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos()).ToList();
+                List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos(start, limit)).ToList();
+
+                var totalRegistros = await _clienteRepository.TotalRegistros();
 
                 return Json(new
                 {
-                    data = a,
+                    data = clientes,
+                    total = totalRegistros,
                     success = true
                 });
             }
@@ -43,15 +46,14 @@ namespace PostoGasolina.App.Controllers
             {
                 Guid id = Guid.Parse(data);
 
-                ClienteViewModel a = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
+                ClienteViewModel cliente = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
 
                 return Json(new
                 {
-                    data = a,
+                    data = cliente,
                     success = true
                 });
             }
-            //return View(_mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos()));
         }
 
         public async Task<IActionResult> Details(Guid id)

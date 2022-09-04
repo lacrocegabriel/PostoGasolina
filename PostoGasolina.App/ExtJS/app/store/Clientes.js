@@ -3,6 +3,8 @@
 
     model: 'PostoGasolina.model.Cliente',
 
+    pageSize: 10,
+
     proxy: {
         type: 'ajax',
         api: {

@@ -11,7 +11,7 @@ namespace PostoGasolina.Business.Models.Interfaces
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosPorCliente(Guid clienteid);
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosCliente();
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculo();
-        Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente();
+        Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente(int start, int limit);
 
     }
 }

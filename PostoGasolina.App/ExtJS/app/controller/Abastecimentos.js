@@ -144,12 +144,12 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             });
 
             store.add(abastecimento);
-            
+            toolbar.doRefresh();
         }
 
         store.sync();
         win.close();
-        
+        toolbar.doRefresh();
     },
     onDeleteClick: function (btn, e, eOpts) {
 

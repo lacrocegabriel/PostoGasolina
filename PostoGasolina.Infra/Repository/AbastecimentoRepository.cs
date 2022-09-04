@@ -41,13 +41,15 @@ namespace PostoGasolina.Infra.Repository
             return await Buscar(a => a.VeiculoId == veiculoId);
         }
 
-        public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente()
+        public async Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente(int start, int limit)
         {
             return await Db.Abastecimentos.AsNoTracking()
                 .Include(a => a.Cliente)
                 .Include(a => a.Veiculo)
                 .Include(a => a.TipoCombustivel)
                 .OrderBy(a => a.DataAbastecimento)
+                .Skip(start)
+                .Take(limit)
                 .ToListAsync();
         }
     }

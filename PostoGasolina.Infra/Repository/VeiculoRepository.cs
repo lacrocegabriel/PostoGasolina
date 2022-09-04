@@ -15,12 +15,14 @@ namespace PostoGasolina.Infra.Repository
         {
         }
 
-        public async Task<IEnumerable<Veiculo>> ObterVeiculosCliente()
+        public async Task<IEnumerable<Veiculo>> ObterVeiculosCliente(int start, int limit)
         {
             return await Db.Veiculos.AsNoTracking()
                 .Include(v => v.Cliente)
                 .Include(v => v.TipoCombustivel)
                 .OrderBy(v => v.Cliente.Nome)
+                .Skip(start)
+                .Take(limit)
                 .ToListAsync();
         }
 

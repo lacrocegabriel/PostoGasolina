@@ -8,7 +8,7 @@ namespace PostoGasolina.Business.Models.Interfaces
     public interface IVeiculoRepository : IRepository<Veiculo>
     {
 
-        Task<IEnumerable<Veiculo>> ObterVeiculosCliente();
+        Task<IEnumerable<Veiculo>> ObterVeiculosCliente(int start, int limit);
         Task<IEnumerable<Veiculo>> ObterVeiculosPorCliente(Guid clienteId);
         
         

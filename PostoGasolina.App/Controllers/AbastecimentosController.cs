@@ -28,21 +28,19 @@ namespace PostoGasolina.App.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int start, int limit)
         
         {
+            List<AbastecimentoViewModel> abastecimentos = _mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterAbastecimentosVeiculoCliente(start, limit)).ToList();
 
-            List<AbastecimentoViewModel> a = _mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterAbastecimentosVeiculoCliente()).ToList();
+            var totalRegistros = _abastecimentoRepository.TotalRegistros();
 
-            var json = JsonConvert.SerializeObject(a);
-           
-            return Json(a);
-            //return Json(new
-            //{
-            //    data = a,
-            //    success = true
-            //});
-            //return View(_mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterTodos()));
+            return Json(new
+            {
+                data = abastecimentos,
+                total = totalRegistros,
+                success = true
+            });
         }
 
         public async Task<IActionResult> Details(Guid id)

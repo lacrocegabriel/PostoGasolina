@@ -28,9 +28,20 @@ namespace PostoGasolina.Infra.Repository
             return await DbSet.FindAsync(id);
         }
 
-        public async Task<List<TEntity>> ObterTodos()
+        public async Task<List<TEntity>> ObterTodos(int start, int limit)
         {
-            return await DbSet.ToListAsync();
+            return
+                await DbSet
+                .OrderBy(x => x.Id)
+                .Skip(start)
+                .Take(limit)
+                .ToListAsync();
+        }
+        public async Task<int> TotalRegistros()
+        {
+            var total = await DbSet.CountAsync();
+
+            return total;
         }
 
         public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
