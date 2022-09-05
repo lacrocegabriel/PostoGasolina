@@ -3,6 +3,8 @@
 
     model: 'PostoGasolina.model.Abastecimento',
 
+    pageSize: 30,
+
     proxy: {
         type: 'ajax',
         api: {

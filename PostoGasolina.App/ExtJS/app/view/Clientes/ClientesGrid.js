@@ -23,11 +23,16 @@
         },
         {
             text: 'Data Cadastro',
-            dataIndex: 'dataCadastro'
+            dataIndex: 'dataCadastro',
+            xtype: 'datecolumn',
+            format: 'd/m/Y',
         },
         {
             text: 'Ativo',
-            dataIndex: 'ativo'
+            dataIndex: 'ativo',
+            xtype: 'booleancolumn',
+            trueText: 'Sim',
+            falseText: 'Não'
         }
     ],
 

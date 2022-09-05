@@ -21,11 +21,12 @@
                     fieldLabel: 'Cliente',
                     name: 'clienteid',
                     store: 'PostoGasolina.store.Clientes',
-                    queryMode: 'local',
+                    queryMode: 'remote',
                     displayField: 'nome',
                     valueField: 'id',
                     itemId: 'cbcliente',
-                    editable: false
+                    pageSize: 30,
+                    queryDelay: 1000
                 },
                 {
                     xtype: 'textfield',

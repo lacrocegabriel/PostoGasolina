@@ -22,7 +22,8 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     xtype: 'datefield',
                     anchor: '100%',
                     name: 'dataAbastecimento',
-                    fieldLabel: 'Data Abastecimento'
+                    fieldLabel: 'Data Abastecimento',
+                    format: 'd m Y'
                 },
                 {
                     xtype: 'combobox',
@@ -33,26 +34,17 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     displayField: 'nome',
                     valueField: 'id',
                     itemId: 'cbcliente',
-                    //listeners: {
-                    //    change: function (combo, value) {
-                    //        groupStore.load({
-                    //            params: {
-                    //                data: value
-                    //            }
-                    //        });
-                    //    }
-                    //},
-                    //items: [{
-                    //    xtype: 'pagingtoolbar',
-                    //    store: 'PostoGasolina.store.Clientes',
-                    //    dock: 'bottom',
-                    //    displayInfo: false,
-                    //    beforePageText: '',
-                    //    afterPageText: '{0}',
-                    //    emptyMsg: 'Nenhum registro encontrado',
-                    //    displayMsg: ''
-                    //}]
-                    pageSize: 5,
+                    listeners: {
+                        select: function (combo, value,eOpts) {
+                            groupStore.load({
+                                params: {
+                                    data: combo.getValue()
+                                }
+                            });
+                            
+                        }
+                    },
+                    pageSize: 30,
                     queryDelay: 1000
                 },
                 {
