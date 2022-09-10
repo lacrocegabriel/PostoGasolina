@@ -8,10 +8,10 @@
     proxy: {
         type: 'ajax',
         api: {
-            create: '/Abastecimentos/Create',
-            read: '/Abastecimentos/Index',
-            update: '/Abastecimentos/Edit',
-            destroy: '/Abastecimentos/Delete'
+            create: '/Abastecimentos/SaveAbastecimento',
+            read: '/Abastecimentos/GetGridAbastecimentos',
+            update: '/Abastecimentos/EditAbastecimento',
+            destroy: '/Abastecimentos/DeleteAbastecimento'
         },
         
         reader: {

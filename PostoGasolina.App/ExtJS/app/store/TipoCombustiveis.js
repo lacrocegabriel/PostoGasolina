@@ -12,4 +12,17 @@
         { id: '4', descricao: 'Flex' }
         
     ]
+    //,
+    //listeners: {
+    //    beforeload: function (store, operation, eOpts) {
+
+    //        console.log(operation);
+
+    //        var comboc = Ext.ComponentQuery.query('combo#cbveiculo')[0];
+
+    //        /*operation.params.query = comboc.value;*/
+
+    //    }
+    //}
+
 });

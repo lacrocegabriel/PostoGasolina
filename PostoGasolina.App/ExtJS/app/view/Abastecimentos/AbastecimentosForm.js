@@ -1,4 +1,4 @@
-﻿var groupStore = Ext.create('PostoGasolina.store.Veiculos');
+﻿var groupStore = Ext.create('PostoGasolina.store.TipoCombustiveis');
 
 Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
 
@@ -23,27 +23,17 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     anchor: '100%',
                     name: 'dataAbastecimento',
                     fieldLabel: 'Data Abastecimento',
-                    format: 'd m Y'
+                    format: 'd/m/Y'
                 },
                 {
                     xtype: 'combobox',
                     fieldLabel: 'Cliente',
                     name: 'clienteid',
-                    store: 'PostoGasolina.store.Clientes',
+                    store: 'PostoGasolina.store.ClientesCombo',
                     queryMode: 'remote',
                     displayField: 'nome',
                     valueField: 'id',
                     itemId: 'cbcliente',
-                    listeners: {
-                        select: function (combo, value,eOpts) {
-                            groupStore.load({
-                                params: {
-                                    data: combo.getValue()
-                                }
-                            });
-                            
-                        }
-                    },
                     pageSize: 30,
                     queryDelay: 1000
                 },
@@ -51,12 +41,14 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     xtype: 'combobox',
                     fieldLabel: 'Veiculo',
                     name:'veiculoid',
-                    store: groupStore,
-                    queryMode: 'local',
+                    store: 'PostoGasolina.store.VeiculosCombo',
+                    queryMode: 'remote',
                     displayField: 'modelo',
                     valueField: 'id',
-                    itemId: 'cbveiculo'
-
+                    itemId: 'cbveiculo',
+                    pageSize: 30,
+                    queryDelay: 1000
+                    
                 },
                 {
                     xtype: 'combobox',

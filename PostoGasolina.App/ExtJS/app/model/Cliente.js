@@ -7,9 +7,6 @@
         {name: 'documento', type: 'string'},
         {name:'dataCadastro', type: 'date'},
         {name:'ativo', type: 'bool'}
-    ],
-    associations: [
-        { type: 'hasMany', model: 'PostoGasolina.model.Veiculo', name: 'veiculos' }
     ]
 
 });

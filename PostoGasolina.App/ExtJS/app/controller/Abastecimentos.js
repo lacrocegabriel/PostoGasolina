@@ -8,7 +8,9 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
     stores: [
         'PostoGasolina.store.Abastecimentos',
         'PostoGasolina.store.Clientes',
+        'PostoGasolina.store.ClientesCombo',
         'PostoGasolina.store.Veiculos',
+        'PostoGasolina.store.VeiculosCombo',
         'PostoGasolina.store.TipoCombustiveis'
     ],
 
@@ -35,7 +37,10 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
                 click: this.onDeleteClick
             },
             "abastecimentosform combobox#cbcliente": {
-                render: this.onFormRender
+                select: this.onClearComboVeiculo
+            },
+            "abastecimentosform combobox#cbveiculo": {
+                select: this.onClearComboCombustivel
             },
             "abastecimentosform button#cancel": {
                 click: this.onCancelClick
@@ -49,9 +54,6 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
     onGridRender: function (grid, eOpts) {
         grid.getStore().load();
     },
-    onFormRender: function (combo, eOpts) {
-        combo.getStore().load();
-    },
     onAddClick: function(btn, e, eOpts) {
 
         var win = Ext.create('PostoGasolina.view.Abastecimentos.AbastecimentosForm');
@@ -64,8 +66,6 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
         var grid = btn.up('grid');
 
         var record = grid.getSelectionModel().getLastSelected();
-
-        console.log(record);
 
         var win = Ext.create('PostoGasolina.view.Abastecimentos.AbastecimentosForm');
 
@@ -95,19 +95,25 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
 
         var form = win.down('form');
 
-        var comboc = form.down('combo#cbcliente');
+        form.down('combo#cbcliente').setValue(record.data.clienteid);
 
-        var combov = form.down('combo#cbveiculo');
+        form.down('combo#cbcliente').getStore().load({
+            params: {
+                data: record.data.clienteid
+            }
+        });
+               
 
-        var combot = form.down('combo#cbtipoCombustivel');
+        form.down('combo#cbveiculo').getStore().load({
+            params: {
+                data: record.data.clienteid
+            }
+        });
+
+        form.down('combo#cbtipoCombustivel').setValue(record.data.tipoCombustivelid);
 
         form.loadRecord(record);
 
-        comboc.setValue(record.data.clienteid);
-        
-        combov.setValue(record.data.veiculoid);
-
-        combot.setValue(record.data.tipoCombustivelid);
     },
     onCancelClick: function (btn, e, eOpts) {
         var win = btn.up('window');
@@ -145,11 +151,14 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
 
             store.add(abastecimento);
             toolbar.doRefresh();
+            
         }
 
         store.sync();
         win.close();
         toolbar.doRefresh();
+       
+        
     },
     onDeleteClick: function (btn, e, eOpts) {
 
@@ -162,5 +171,35 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
         store.remove(record);
 
         store.sync();
+    },
+    onClearComboVeiculo: function (combo, record, eOpts) {
+
+        var form = combo.up('form');
+
+        var combov = form.down('combo#cbveiculo')
+
+        combov.clearValue();
+
+        combov.getStore().load({
+            params: {
+                data: record[0].data.clienteid
+            }
+        });
+    },
+    onClearComboCombustivel: function (combo, record, eOpts) {
+
+        console.log(record[0]);
+
+        var form = combo.up('form');
+
+        var combotc = form.down('combo#cbtipoCombustivel')
+
+        combotc.clearValue();
+
+        //combotc.getStore().load({
+        //    params: {
+        //        data: record[0].data.clienteid
+        //    }
+        //});
     }
 });

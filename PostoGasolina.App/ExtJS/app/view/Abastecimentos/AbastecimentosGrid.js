@@ -43,7 +43,10 @@
         },
         {
             text: 'Data Abastecimento',
-            dataIndex: 'dataAbastecimento'
+            dataIndex: 'dataAbastecimento',
+            xtype: 'datecolumn',
+            dateFormat: 'd/m/Y',
+            format: 'd/m/Y'
         },
         {
             text: 'Valor Total',

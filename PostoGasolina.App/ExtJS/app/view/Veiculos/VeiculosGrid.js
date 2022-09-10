@@ -43,7 +43,10 @@
         },
         {
             text: 'Ativo',
-            dataIndex: 'ativo'
+            dataIndex: 'ativo',
+            xtype: 'booleancolumn',
+            trueText: 'Sim',
+            falseText: 'Não'
         }
     ],
 

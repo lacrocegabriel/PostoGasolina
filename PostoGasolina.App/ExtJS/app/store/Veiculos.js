@@ -6,10 +6,10 @@
     proxy: {
         type: 'ajax',
         api: {
-            create: '/Veiculos/Create',
-            read: '/Veiculos/Index',
-            update: '/Veiculos/Edit',
-            destroy: '/Veiculos/Delete'
+            create: '/Veiculos/SaveVeiculo',
+            read: '/Veiculos/GetGridVeiculos',
+            update: '/Veiculos/EditVeiculo',
+            destroy: '/Veiculos/DeleteVeiculo'
         },
         
         reader: {

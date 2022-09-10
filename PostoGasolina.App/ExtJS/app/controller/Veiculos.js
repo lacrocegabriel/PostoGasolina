@@ -7,7 +7,8 @@ Ext.define('PostoGasolina.controller.Veiculos', {
 
     stores: [
         'PostoGasolina.store.Veiculos',
-        'PostoGasolina.store.Clientes'
+        'PostoGasolina.store.Clientes',
+        'PostoGasolina.store.ClientesCombo'
     ],
 
     views: [
@@ -33,9 +34,6 @@ Ext.define('PostoGasolina.controller.Veiculos', {
             "veiculosgrid button#delete": {
                 click: this.onDeleteClick
             },
-            "veiculosform combo#cbcliente": {
-                render: this.onFormRender
-            },
             "veiculosform button#cancel": {
                 click: this.onCancelClick
             },
@@ -47,9 +45,6 @@ Ext.define('PostoGasolina.controller.Veiculos', {
 
     onGridRender: function (grid, eOpts) {
         grid.getStore().load();
-    },
-    onFormRender: function (combo, eOpts) {
-        combo.getStore().load();
     },
     onAddClick: function(btn, e, eOpts) {
 
@@ -91,14 +86,18 @@ Ext.define('PostoGasolina.controller.Veiculos', {
 
         var form = win.down('form');
 
-        var comboc = form.down('combo#cbcliente');
+        form.down('combo#cbcliente').setValue(record.data.clienteid);
+
+        form.down('combo#cbcliente').getStore().load({
+            params: {
+                data: record.data.clienteid
+            }
+        });
 
         var combot = form.down('combo#cbtipoCombustivel');
 
         form.loadRecord(record);
 
-        comboc.setValue(record.data.clienteid);
-        
         combot.setValue(record.data.tipoCombustivelid);
     },
     onCancelClick: function (btn, e, eOpts) {
@@ -138,11 +137,15 @@ Ext.define('PostoGasolina.controller.Veiculos', {
 
             store.add(veiculo);
             toolbar.doRefresh();
+            
+            
         }
 
         store.sync();
         win.close();
         toolbar.doRefresh();
+        
+        
     },
     onDeleteClick: function (btn, e, eOpts) {
 

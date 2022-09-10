@@ -26,7 +26,7 @@ namespace PostoGasolina.App.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index(string data, int start, int limit)
+        public async Task<IActionResult> GetGridVeiculos(string data, int start, int limit, string query)
         {
 
             if (data == null)
@@ -56,21 +56,37 @@ namespace PostoGasolina.App.Controllers
                 });
             }            
         }
-
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> GetComboVeiculos(string data, int start, int limit, string query)
         {
 
-            return View( _mapper.Map<VeiculoViewModel>(await _veiculoRepository.ObterPorId(id)));
-        }
+            if (data == null)
+            {
+                List<VeiculoViewModel> veiculos = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterVeiculosCliente(start, limit)).ToList();
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+                var totalRegistros = await _veiculoRepository.TotalRegistros();
 
+                return Json(new
+                {
+                    success = true
+                });
+
+            }
+            else
+            {
+                Guid id = Guid.Parse(data);
+
+                List<VeiculoViewModel> veiculos = _mapper.Map<IEnumerable<VeiculoViewModel>>(await _veiculoRepository.ObterVeiculosPorCliente(id, start, limit)).ToList();
+
+                return Json(new
+                {
+                    data = veiculos,
+                    success = true
+                });
+            }
+        }
+        
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string data)
+        public async Task<IActionResult> SaveVeiculo(string data)
         {
 
             var veiculoViewModel = JsonConvert.DeserializeObject<VeiculoViewModel>(data);
@@ -82,24 +98,14 @@ namespace PostoGasolina.App.Controllers
                 await _veiculoRepository.Adicionar(veiculo);
             }
 
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Edit(Guid id)
-        {
-            var veiculoViewModel = _mapper.Map<VeiculoViewModel>(await _veiculoRepository.ObterPorId(id));
-            
-            if (veiculoViewModel == null)
+            return Json(new
             {
-                return NotFound();
-            }
-
-            return View(veiculoViewModel);
+                success = true
+            });
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string data)
+        public async Task<IActionResult> EditVeiculo(string data)
         {
             var veiculoViewModel = JsonConvert.DeserializeObject<VeiculoViewModel>(data);
 
@@ -110,24 +116,14 @@ namespace PostoGasolina.App.Controllers
                 await _veiculoRepository.Atualizar(veiculo);
             }
 
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var veiculoViewModel = _mapper.Map<VeiculoViewModel>(await _veiculoRepository.ObterPorId(id));
-
-            if (veiculoViewModel == null)
+            return Json(new
             {
-                return NotFound();
-            }
-
-            return View(veiculoViewModel);
+                success = true
+            });
         }
 
-        [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string data)
+        [HttpPost]
+        public async Task<IActionResult> DeleteVeiculo(string data)
         {
             var result = JsonConvert.DeserializeObject<VeiculoViewModel>(data);
 
@@ -140,7 +136,10 @@ namespace PostoGasolina.App.Controllers
 
             await _veiculoRepository.Remover(result.Id);
 
-            return RedirectToAction("Index");            
+            return Json(new
+            {
+                success = true
+            });
         }
 
     }

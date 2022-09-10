@@ -8,10 +8,10 @@
     proxy: {
         type: 'ajax',
         api: {
-            create: '/Clientes/Create',
-            read: '/Clientes/Index',
-            update: '/Clientes/Edit',
-            destroy: '/Clientes/Delete'
+            create: '/Clientes/SaveCliente',
+            read: '/Clientes/GetGridClientes',
+            update: '/Clientes/EditCliente',
+            destroy: '/Clientes/DeleteCliente'
         },
         
         reader: {

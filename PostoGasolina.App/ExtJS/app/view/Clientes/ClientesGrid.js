@@ -25,7 +25,8 @@
             text: 'Data Cadastro',
             dataIndex: 'dataCadastro',
             xtype: 'datecolumn',
-            format: 'd/m/Y',
+            dateFormat: 'd/m/Y',
+            format: 'd/m/Y'
         },
         {
             text: 'Ativo',

@@ -20,7 +20,7 @@
                     xtype: 'combobox',
                     fieldLabel: 'Cliente',
                     name: 'clienteid',
-                    store: 'PostoGasolina.store.Clientes',
+                    store: 'PostoGasolina.store.ClientesCombo',
                     queryMode: 'remote',
                     displayField: 'nome',
                     valueField: 'id',

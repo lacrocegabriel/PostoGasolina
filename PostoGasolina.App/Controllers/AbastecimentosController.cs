@@ -28,8 +28,7 @@ namespace PostoGasolina.App.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index(int start, int limit)
-        
+        public async Task<IActionResult> GetGridAbastecimentos(int start, int limit)
         {
             List<AbastecimentoViewModel> abastecimentos = _mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterAbastecimentosVeiculoCliente(start, limit)).ToList();
 
@@ -43,26 +42,8 @@ namespace PostoGasolina.App.Controllers
             });
         }
 
-        public async Task<IActionResult> Details(Guid id)
-        {
-            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(id));
-
-            if (abastecimentoViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(abastecimentoViewModel);
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string data)
+        public async Task<IActionResult> SaveAbastecimento(string data)
         {
 
             var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
@@ -73,25 +54,15 @@ namespace PostoGasolina.App.Controllers
 
                 await _abastecimentoRepository.Adicionar(abastecimento);
             }
-            
-            return RedirectToAction("Index");
-        }
 
-        public async Task<IActionResult> Edit(Guid id)
-        {
-            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(id));
-            
-            if (abastecimentoViewModel == null)
+            return Json(new
             {
-                return NotFound();
-            }
-            
-            return View(abastecimentoViewModel);
+                success = true
+            });
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string data)
+        public async Task<IActionResult> EditAbastecimento(string data)
         {
 
             var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
@@ -103,24 +74,14 @@ namespace PostoGasolina.App.Controllers
                 await _abastecimentoRepository.Atualizar(abastecimento);
             }
             
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(id));
-                
-            if (abastecimentoViewModel == null)
+            return Json(new
             {
-                return NotFound();
-            }
-
-            return View(abastecimentoViewModel);
+                success = true
+            });
         }
 
-        [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string data)
+       [HttpPost]
+        public async Task<IActionResult> DeleteAbastecimento(string data)
         {
 
             var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
@@ -134,7 +95,10 @@ namespace PostoGasolina.App.Controllers
 
             await _abastecimentoRepository.Remover(json.Id);
 
-            return RedirectToAction("Index");
+            return Json(new
+            {
+                success = true
+            });
         }
 
     }

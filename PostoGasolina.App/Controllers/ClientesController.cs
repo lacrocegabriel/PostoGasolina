@@ -26,13 +26,32 @@ namespace PostoGasolina.App.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index(string data,int start, int limit, string query)
+        public async Task<IActionResult> GetGridClientes(string data,int start, int limit, string query)
         {
 
-            if (data == null && query == null)
+            List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos(start, limit)).ToList();
+            
+            var totalRegistros = await _clienteRepository.TotalRegistros();
+
+            return Json(new
+            {
+                data = clientes,
+                total = totalRegistros,
+                success = true
+            });
+        }
+
+        public async Task<IActionResult> GetComboClientes(string data, int start, int limit, string query)
+        {
+
+            if (data == null && query != null || data != null && query != null)
             {
                 List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos(start, limit)).ToList();
 
+                clientes.Remove(clientes.LastOrDefault());
+
+                clientes.Add(_mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(Guid.Parse(query))));
+                
                 var totalRegistros = await _clienteRepository.TotalRegistros();
 
                 return Json(new
@@ -56,42 +75,22 @@ namespace PostoGasolina.App.Controllers
             }
             else
             {
-                IEnumerable<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>
-                                                        (await _clienteRepository.Buscar(c => c.Nome.Contains(query), start, limit));
-                
-                var totalRegistros = _clienteRepository.TotalRegistrosPorFiltro(query);
+                List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos(start, limit)).ToList();
+
+                var totalRegistros = await _clienteRepository.TotalRegistros();
 
                 return Json(new
                 {
                     data = clientes,
-                    total = totalRegistros.Result,
+                    total = totalRegistros,
                     success = true
                 });
             }
         }
 
-        public async Task<IActionResult> Details(Guid id)
+       [HttpPost]
+        public async Task<IActionResult> SaveCliente(string data)
         {
-            var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
-                
-            if (clienteViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(clienteViewModel);
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string data)
-        {
-
             var clienteViewModel = JsonConvert.DeserializeObject<ClienteViewModel>(data);
 
             if (ModelState.IsValid)
@@ -100,24 +99,15 @@ namespace PostoGasolina.App.Controllers
 
                 await _clienteRepository.Adicionar(cliente);
             }
-            return RedirectToAction("Index");
-        }
 
-        public async Task<IActionResult> Edit(Guid id)
-        {
-            var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
-            
-            if (clienteViewModel == null)
+            return Json(new
             {
-                return NotFound();
-            }
-            
-            return View(clienteViewModel);
+                success = true
+            });
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string data)
+        public async Task<IActionResult> EditCliente(string data)
         {
             var clienteViewModel = JsonConvert.DeserializeObject<ClienteViewModel>(data);
 
@@ -128,26 +118,15 @@ namespace PostoGasolina.App.Controllers
                 await _clienteRepository.Atualizar(cliente);
             }
 
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
-            
-            if (clienteViewModel == null)
+            return Json(new
             {
-                return NotFound();
-            }
-
-            return View(clienteViewModel);
+                success = true
+            });
         }
 
-        [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string data)
+       [HttpPost]
+        public async Task<IActionResult> DeleteCliente(string data)
         {
-
             var result = JsonConvert.DeserializeObject<ClienteViewModel>(data);
 
             var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(result.Id));
@@ -159,7 +138,10 @@ namespace PostoGasolina.App.Controllers
 
             await _clienteRepository.Remover(clienteViewModel.Id);
 
-            return RedirectToAction("Index");
+            return Json(new
+            {
+                success = true
+            });
         }
     }
 }

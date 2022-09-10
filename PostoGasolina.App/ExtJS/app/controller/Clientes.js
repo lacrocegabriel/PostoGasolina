@@ -100,8 +100,6 @@ Ext.define('PostoGasolina.controller.Clientes', {
             store = grid.getStore(),
             toolbar = grid.down('pagingtoolbar');
 
-        console.log(values);
-
         if (record) {
 
             record.set(values);

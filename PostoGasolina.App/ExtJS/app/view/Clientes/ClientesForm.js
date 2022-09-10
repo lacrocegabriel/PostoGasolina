@@ -30,7 +30,8 @@
                     xtype: 'datefield',
                     anchor: '100%',
                     name: 'dataCadastro',
-                    fieldLabel: 'Data Cadastro'
+                    fieldLabel: 'Data Cadastro',
+                    format: 'd/m/Y'
                 },
                 {
                     xtype: 'fieldcontainer',
