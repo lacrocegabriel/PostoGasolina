@@ -171,7 +171,7 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             grid = Ext.ComponentQuery.query('abastecimentosgrid')[0],
             store = grid.getStore(),
             toolbar = grid.down('pagingtoolbar');
-
+            
         if (record) {
 
             record.set(values);
@@ -188,15 +188,11 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             });
 
             store.add(abastecimento);
-            toolbar.doRefresh();
-            
+
         }
 
         store.sync();
         win.close();
-        toolbar.doRefresh();
-       
-        
     },
     onDeleteClick: function (btn, e, eOpts) {
 

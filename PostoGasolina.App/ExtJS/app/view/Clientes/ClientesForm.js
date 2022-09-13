@@ -31,7 +31,8 @@
                     anchor: '100%',
                     name: 'dataCadastro',
                     fieldLabel: 'Data Cadastro',
-                    format: 'd/m/Y'
+                    format: 'd/m/Y',
+                    submitFormat: 'Y-m-d'
                 },
                 {
                     xtype: 'fieldcontainer',

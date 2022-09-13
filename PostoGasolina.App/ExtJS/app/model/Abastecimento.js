@@ -6,7 +6,7 @@
         { name: 'litragem', type: 'decimal' },
         { name: 'valorLitro', type: 'decimal'},
         { name: 'tipoCombustivel', type: 'int' },
-        { name: 'dataAbastecimento', type: 'date' },
+        { name: 'dataAbastecimento', type: 'date'},
         { name: 'clienteid', mapping: 'cliente.id', type: 'guid' },
         { name: 'cliente_nome', mapping: 'cliente.nome', type: 'string' },
         { name: 'cliente_documento', mapping: 'cliente.documento', type: 'string' },

@@ -23,7 +23,8 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     anchor: '100%',
                     name: 'dataAbastecimento',
                     fieldLabel: 'Data Abastecimento',
-                    format: 'd/m/Y'
+                    format: 'd/m/Y',
+                    submitFormat: 'Y-m-d'
                 },
                 {
                     xtype: 'combobox',

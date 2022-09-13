@@ -45,7 +45,7 @@
             text: 'Data Abastecimento',
             dataIndex: 'dataAbastecimento',
             xtype: 'datecolumn',
-            dateFormat: 'd/m/Y',
+            dateFormat: 'Y-m-d',
             format: 'd/m/Y'
         },
         {
