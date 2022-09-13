@@ -4,6 +4,8 @@
 
     model: 'PostoGasolina.model.TipoCombustivel',
 
+    autoLoad: false,
+
     data: [
         { id: '0', descricao: 'Gasolina' },
         { id: '1', descricao: 'Etanol' },
@@ -14,13 +16,13 @@
     ]
     //,
     //listeners: {
-    //    beforeload: function (store, operation, eOpts) {
-
-    //        console.log(operation);
+    //    load: function (store, operation, eOpts) {
 
     //        var comboc = Ext.ComponentQuery.query('combo#cbveiculo')[0];
 
-    //        /*operation.params.query = comboc.value;*/
+    //        console.log(comboc);
+
+    //        //operation.params.query = comboc.value;
 
     //    }
     //}

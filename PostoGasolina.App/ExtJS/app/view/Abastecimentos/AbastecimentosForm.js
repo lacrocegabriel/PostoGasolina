@@ -48,13 +48,14 @@ Ext.define('PostoGasolina.view.Abastecimentos.AbastecimentosForm', {
                     itemId: 'cbveiculo',
                     pageSize: 30,
                     queryDelay: 1000
+
                     
                 },
                 {
                     xtype: 'combobox',
                     fieldLabel: 'Tipo Combustivel',
                     name: 'tipoCombustivelid',
-                    store: 'PostoGasolina.store.TipoCombustiveis',
+                    store:  'PostoGasolina.store.TipoCombustiveis',
                     queryMode: 'local',
                     displayField: 'descricao',
                     valueField: 'id',

@@ -59,6 +59,14 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
         var win = Ext.create('PostoGasolina.view.Abastecimentos.AbastecimentosForm');
 
         win.setTitle('Adicionar');
+
+        var form = win.down('form');
+
+        var combotc = form.down('combo#cbtipoCombustivel');
+
+        combotc.getStore().filter([
+            { filterFn: function (tipoCombustivel) { return tipoCombustivel.get("id") < 0; } }
+        ]);;
         
     },
     onBEditClick: function (btn, e, eOpts) {
@@ -73,19 +81,38 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
 
         var form = win.down('form');
 
-        var comboc = form.down('combo#cbcliente');
+        var comboc = form.down('combo#cbcliente')
 
-        var combov = form.down('combo#cbveiculo');
-
-        var combot = form.down('combo#cbtipoCombustivel');
-
-        form.loadRecord(record);
+        comboc.getStore().load({
+            params: {
+                data: record.data.clienteid
+            }
+        });
 
         comboc.setValue(record.data.clienteid);
 
-        combov.setValue(record.data.veiculoid);
+        var combov = form.down('combo#cbveiculo')
 
-        combot.setValue(record.data.tipoCombustivelid);
+        combov.getStore().load({
+            params: {
+                data: record.data.clienteid
+            }
+        });
+
+        var combotc = form.down('combo#cbtipoCombustivel');
+
+        combotc.setValue(record.data.tipoCombustivelid);
+
+        form.loadRecord(record);
+
+        if (record.data.tipoCombustivelid == 4) {
+            combotc.getStore().filter([
+                { filterFn: function (tipoCombustivel) { return tipoCombustivel.get("id") <= 1; } }
+            ]);
+        }
+        else {
+            combotc.getStore().filter("id", record.data.tipoCombustivelid);
+        }
     },
     onEditClick: function (grid, record, item, index, e, eOpts) {
 
@@ -110,9 +137,20 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             }
         });
 
-        form.down('combo#cbtipoCombustivel').setValue(record.data.tipoCombustivelid);
+        var combotc = form.down('combo#cbtipoCombustivel')
+
+        combotc.setValue(record.data.tipoCombustivelid);
 
         form.loadRecord(record);
+
+        if (record.data.tipoCombustivelid == 4) {
+            combotc.getStore().filter([
+                { filterFn: function (tipoCombustivel) { return tipoCombustivel.get("id") <= 1; } }
+            ]);
+        }
+        else {
+            combotc.getStore().filter("id", record.data.tipoCombustivelid);
+        }
 
     },
     onCancelClick: function (btn, e, eOpts) {
@@ -178,6 +216,14 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
 
         var combov = form.down('combo#cbveiculo')
 
+        var combotc = form.down('combo#cbtipoCombustivel')
+
+        combotc.clearValue();
+
+        combotc.getStore().filter([
+            { filterFn: function (tipoCombustivel) { return tipoCombustivel.get("id") < 0; } }
+        ]);
+
         combov.clearValue();
 
         combov.getStore().load({
@@ -188,18 +234,23 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
     },
     onClearComboCombustivel: function (combo, record, eOpts) {
 
-        console.log(record[0]);
-
         var form = combo.up('form');
 
         var combotc = form.down('combo#cbtipoCombustivel')
 
         combotc.clearValue();
 
-        //combotc.getStore().load({
-        //    params: {
-        //        data: record[0].data.clienteid
-        //    }
-        //});
+        combotc.getStore().clearFilter();
+
+        if (record[0].raw.tipoCombustivelId == 4) {
+            combotc.getStore().filter([
+                { filterFn: function (tipoCombustivel) { return tipoCombustivel.get("id") <= 1; } }
+            ]);
+        }
+        else {
+            combotc.getStore().filter("id", record[0].raw.tipoCombustivelId);
+        }
+        
+
     }
 });

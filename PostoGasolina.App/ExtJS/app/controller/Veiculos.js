@@ -58,8 +58,6 @@ Ext.define('PostoGasolina.controller.Veiculos', {
 
         var record = grid.getSelectionModel().getLastSelected();
 
-        console.log(record);
-
         var win = Ext.create('PostoGasolina.view.Veiculos.VeiculosForm');
 
         win.setTitle('Editar');
@@ -68,17 +66,25 @@ Ext.define('PostoGasolina.controller.Veiculos', {
 
         var comboc = form.down('combo#cbcliente');
 
-        var combot = form.down('combo#cbtipoCombustivel');
-
-        form.loadRecord(record);
+        comboc.getStore().load({
+            params: {
+                data: record.data.clienteid
+            }
+        });
 
         comboc.setValue(record.data.clienteid);
 
-        combot.setValue(record.data.tipoCombustivelid);
+        var combotc = form.down('combo#cbtipoCombustivel');
+
+        combotc.getStore().clearFilter();
+
+        form.loadRecord(record);
+
+        combotc.setValue(record.data.tipoCombustivelid);
     },
     onEditClick: function (grid, record, item, index, e, eOpts) {
 
-        console.log(record);
+        //console.log(record);
 
         var win = Ext.create('PostoGasolina.view.Veiculos.VeiculosForm');
 
@@ -94,7 +100,9 @@ Ext.define('PostoGasolina.controller.Veiculos', {
             }
         });
 
-        var combot = form.down('combo#cbtipoCombustivel');
+        var combotc = form.down('combo#cbtipoCombustivel');
+
+        combotc.getStore().clearFilter();
 
         form.loadRecord(record);
 
@@ -117,8 +125,6 @@ Ext.define('PostoGasolina.controller.Veiculos', {
             grid = Ext.ComponentQuery.query('veiculosgrid')[0],
             store = grid.getStore(),
             toolbar = grid.down('pagingtoolbar');
-
-        console.log(values);
 
         if (record) {
 
