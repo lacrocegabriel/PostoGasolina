@@ -113,11 +113,11 @@ Ext.define('PostoGasolina.controller.Clientes', {
             });
 
             store.add(cliente);
-            toolbar.doRefresh();
         }
 
         store.sync();
         win.close();
+        grid.getView().refresh();
         toolbar.doRefresh();
     },
     onDeleteClick: function (btn, e, eOpts) {

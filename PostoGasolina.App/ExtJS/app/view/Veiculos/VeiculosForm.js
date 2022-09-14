@@ -61,17 +61,13 @@
 
                 },
                 {
-                    xtype: 'fieldcontainer',
+                    xtype: 'checkboxfield',
+                    name: 'ativo',
                     fieldLabel: 'Ativo',
-                    defaultType: 'checkboxfield',
-                    items: [{
-                        xtype: 'checkboxfield',
-                        name: 'ativo',
-                        inputValue: '1',
-                        checked: true,
-                        itemId: 'chbativo'
-                    }
-                   ]
+                    inputValue: 'true',
+                    uncheckedValue: 'false',
+                    checked: true,
+                    itemId: 'chbativo'
                 }              
             ]
         }

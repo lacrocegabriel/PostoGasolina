@@ -32,7 +32,7 @@ namespace PostoGasolina.App.Controllers
         {
             List<AbastecimentoViewModel> abastecimentos = _mapper.Map<IEnumerable<AbastecimentoViewModel>>(await _abastecimentoRepository.ObterAbastecimentosVeiculoCliente(start, limit)).ToList();
 
-            var totalRegistros = _abastecimentoRepository.TotalRegistros();
+            var totalRegistros = await _abastecimentoRepository.TotalRegistros();
 
             return Json(new
             {
