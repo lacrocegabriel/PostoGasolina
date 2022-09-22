@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PostoGasolina.App.Data;
-using PostoGasolina.Business.Models.Interfaces;
+using PostoGasolina.Business.Interfaces;
+using PostoGasolina.Business.Notificacoes;
+using PostoGasolina.Business.Services;
 using PostoGasolina.Infra.Context;
 using PostoGasolina.Infra.Repository;
 using System;
@@ -50,8 +52,11 @@ namespace PostoGasolina.App
             services.AddScoped<IAbastecimentoRepository, AbastecimentoRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IVeiculoRepository, VeiculoRepository>();
-            //services.AddScoped<ICombustivelRepository, CombustivelRepository>();
-
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<IAbastecimentoService, AbastecimentoService>();
+            services.AddScoped<INotificador, Notificador>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt =>
                 {

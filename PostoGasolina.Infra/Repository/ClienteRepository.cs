@@ -1,5 +1,5 @@
 ﻿using PostoGasolina.Business.Models;
-using PostoGasolina.Business.Models.Interfaces;
+using PostoGasolina.Business.Interfaces;
 using PostoGasolina.Infra.Context;
 using System;
 using System.Collections.Generic;

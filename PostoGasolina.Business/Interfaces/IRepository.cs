@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PostoGasolina.Business.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace PostoGasolina.Business.Models.Interfaces
+namespace PostoGasolina.Business.Interfaces
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {

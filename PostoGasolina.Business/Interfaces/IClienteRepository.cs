@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using PostoGasolina.Business.Models;
+using System;
 using System.Threading.Tasks;
 
-namespace PostoGasolina.Business.Models.Interfaces
+namespace PostoGasolina.Business.Interfaces
 {
     public interface IClienteRepository : IRepository<Cliente>
     {
@@ -11,6 +10,6 @@ namespace PostoGasolina.Business.Models.Interfaces
         Task<int> TotalRegistrosPorFiltro(string query);
         Task<Cliente> ObterClienteAbastecimentos(Guid id);
         Task<Cliente> ObterClienteVeiculosAbastecimentos(Guid id);
-        
+    
     }
 }

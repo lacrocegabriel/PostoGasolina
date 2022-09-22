@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using PostoGasolina.App.Data;
 using PostoGasolina.App.ViewModels;
 using PostoGasolina.Business.Models;
-using PostoGasolina.Business.Models.Interfaces;
+using PostoGasolina.Business.Interfaces;
 
 namespace PostoGasolina.App.Controllers
 {

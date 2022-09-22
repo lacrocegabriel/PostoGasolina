@@ -9,20 +9,24 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PostoGasolina.App.Data;
 using PostoGasolina.App.ViewModels;
+using PostoGasolina.Business.Interfaces;
 using PostoGasolina.Business.Models;
-using PostoGasolina.Business.Models.Interfaces;
 
 namespace PostoGasolina.App.Controllers
 {
-    public class ClientesController : Controller
+    public class ClientesController : BaseController
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IClienteService _clienteService;
         private readonly IMapper _mapper;
 
-        public ClientesController(IClienteRepository clienteRepository, 
-                                  IMapper mapper)
+        public ClientesController(IClienteRepository clienteRepository,
+                                  IClienteService clienteService,
+                                  IMapper mapper,
+                                  INotificador notificador) : base(notificador)
         {
             _clienteRepository = clienteRepository;
+            _clienteService = clienteService;
             _mapper = mapper;
         }
 
@@ -97,7 +101,7 @@ namespace PostoGasolina.App.Controllers
             {
                 var cliente = _mapper.Map<Cliente>(clienteViewModel);
 
-                await _clienteRepository.Adicionar(cliente);
+                await _clienteService.Adicionar(cliente);
             }
 
             return Json(new
@@ -115,7 +119,7 @@ namespace PostoGasolina.App.Controllers
             {
                 var cliente = _mapper.Map<Cliente>(clienteViewModel);
 
-                await _clienteRepository.Atualizar(cliente);
+                await _clienteService.Atualizar(cliente);
             }
 
             return Json(new
@@ -136,7 +140,7 @@ namespace PostoGasolina.App.Controllers
                 return NotFound();
             }
 
-            await _clienteRepository.Remover(clienteViewModel.Id);
+            await _clienteService.Remover(clienteViewModel.Id);
 
             return Json(new
             {
