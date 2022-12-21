@@ -13,6 +13,7 @@ namespace PostoGasolina.Business.Interfaces
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosCliente();
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculo();
         Task<IEnumerable<Abastecimento>> ObterAbastecimentosVeiculoCliente(int start, int limit);
+        
 
     }
 }

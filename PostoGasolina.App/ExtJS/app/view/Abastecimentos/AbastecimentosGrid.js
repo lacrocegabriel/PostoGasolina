@@ -45,8 +45,7 @@
             text: 'Data Abastecimento',
             dataIndex: 'dataAbastecimento',
             xtype: 'datecolumn',
-            dateFormat: 'Y-m-d',
-            format: 'd/m/Y'
+            renderer: Ext.util.Format.dateRenderer('d/m/Y')
         },
         {
             text: 'Valor Total',

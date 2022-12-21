@@ -39,6 +39,14 @@ namespace PostoGasolina.Infra.Repository
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<List<Cliente>> ObterPorFiltro(int start, int limit, string query)
+        {
+            return await Db.Clientes.AsNoTracking()
+                  .Where(c => c.Nome.Contains(query))
+                  .ToListAsync();
+                 
+        }
+
         public async Task<int> TotalRegistrosPorFiltro(string query)
         {
             var total = await Db.Clientes.CountAsync(c => c.Nome.Contains(query));

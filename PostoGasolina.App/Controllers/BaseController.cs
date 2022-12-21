@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostoGasolina.Business.Interfaces;
+using PostoGasolina.Business.Notificacoes;
+using System.Collections.Generic;
 
 namespace PostoGasolina.App.Controllers
 {
@@ -15,6 +17,15 @@ namespace PostoGasolina.App.Controllers
         protected bool OperacaoValida()
         {
             return !_notificador.TemNotificacao();
+
+            
         }
+        protected List<Notificacao> Notificacoes()
+        {
+            return _notificador.ObterNotificacoes();
+
+        }
+
+
     }
 }

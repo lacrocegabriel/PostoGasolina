@@ -171,7 +171,9 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
             grid = Ext.ComponentQuery.query('abastecimentosgrid')[0],
             store = grid.getStore(),
             toolbar = grid.down('pagingtoolbar');
-            
+
+        console.log(values);
+
         if (record) {
 
             record.set(values);
@@ -191,23 +193,72 @@ Ext.define('PostoGasolina.controller.Abastecimentos', {
 
         }
 
-        store.sync();
-        win.close();
+        store.sync({
+            success: function (batch, opts) {
+                win.close();
+                Ext.Msg.alert({
+                    title: 'Mensagem',
+                    msg: 'Abastecimento salvo com sucesso!',
+                    minWidth: 450,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.INFO
+                });
+                grid.getView().refresh();
+                toolbar.doRefresh();
+            },
+            failure: function (batch, opts) {
 
-        grid.getView().refresh();
-        toolbar.doRefresh();
+                var reader = batch.proxy.getReader();
+                var msgBox = Ext.Msg.alert({
+                    title: 'Mensagem',
+                    msg: reader.jsonData.data.mensagem,
+                    minWidth: 450,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.WARNING
+                });
+
+                store.remove(abastecimento);
+            }
+        })
     },
     onDeleteClick: function (btn, e, eOpts) {
 
-        var grid = btn.up('grid');
-
-        var record = grid.getSelectionModel().getLastSelected();
-        
-        var store = grid.getStore();
+        var grid = btn.up('grid'),
+            record = grid.getSelectionModel().getLastSelected(),
+            store = grid.getStore(),
+            toolbar = grid.down('pagingtoolbar');
 
         store.remove(record);
 
-        store.sync();
+        store.sync({
+            success: function (batch, opts) {
+                win.close();
+                Ext.Msg.alert({
+                    title: 'Mensagem',
+                    msg: 'Abastecimento excluido com sucesso!',
+                    minWidth: 450,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.INFO
+                });
+                grid.getView().refresh();
+                toolbar.doRefresh();
+            },
+            failure: function (batch, opts) {
+
+                var reader = batch.proxy.getReader();
+                var msgBox = Ext.Msg.alert({
+                    title: 'Mensagem',
+                    msg: reader.jsonData.data.mensagem,
+                    minWidth: 450,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.WARNING
+                });
+
+            }
+        })
+
+        grid.getView().refresh();
+        toolbar.doRefresh();
     },
     onClearComboVeiculo: function (combo, record, eOpts) {
 

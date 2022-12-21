@@ -12,7 +12,7 @@ namespace PostoGasolina.App.ViewModels
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Documento { get; set; }
-        public DateTime DataCadastro { get; set; }
+        public DateTime? DataCadastro { get; set; }
         [JsonIgnore]
         public IEnumerable<VeiculoViewModel> Veiculos { get; set; }
         [JsonIgnore]

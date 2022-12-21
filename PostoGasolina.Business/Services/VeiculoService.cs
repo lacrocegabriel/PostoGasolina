@@ -10,28 +10,53 @@ namespace PostoGasolina.Business.Services
 {
     public class VeiculoService : BaseService, IVeiculoService
     {
-        public VeiculoService(INotificador notificador) : base(notificador)
+        private readonly IVeiculoRepository _veiculoRepository;
+        private readonly IAbastecimentoRepository _abastecimentoRepository;
+
+        public VeiculoService(IVeiculoRepository veiculoRepository,
+                              IAbastecimentoRepository abastecimentoRepository,
+                              INotificador notificador) : base(notificador)
         {
+            _veiculoRepository = veiculoRepository;
+            _abastecimentoRepository = abastecimentoRepository;
         }
 
-        public Task Adicionar(Veiculo veiculo)
+        public async Task Adicionar(Veiculo veiculo)
         {
-            throw new NotImplementedException();
+            if (_veiculoRepository.Buscar(v => v.Placa == veiculo.Placa, 1, 25).Result.Any())
+            {
+                Notificar("Já existe um veículo com a mesma placa informada");
+                return;
+            }
+
+            await _veiculoRepository.Adicionar(veiculo);
         }
 
-        public Task Atualizar(Veiculo veiculo)
+        public async Task Atualizar(Veiculo veiculo)
         {
-            throw new NotImplementedException();
+            if (_veiculoRepository.Buscar(v => v.Placa == veiculo.Placa, 1, 25).Result.Any())
+            {
+                Notificar("Já existe um veículo com a mesma placa informada");
+                return;
+            }
+
+            await _veiculoRepository.Atualizar(veiculo);
         }
 
-        public Task Remover(Guid id)
+        public async Task Remover(Guid id)
         {
-            throw new NotImplementedException();
+            if ( _abastecimentoRepository.Buscar(a => a.VeiculoId == id,1,25).Result.Any())
+            {
+                Notificar("Existem abastecimentos vinculados a este veículo, portanto sua exclusão não será realizada!");
+                return;
+            }
+
+            await _veiculoRepository.Remover(id);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _veiculoRepository?.Dispose();
         }
     }
 }

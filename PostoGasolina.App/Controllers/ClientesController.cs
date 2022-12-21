@@ -48,32 +48,31 @@ namespace PostoGasolina.App.Controllers
         public async Task<IActionResult> GetComboClientes(string data, int start, int limit, string query)
         {
 
-            if (data == null && query != null || data != null && query != null)
+            if (data != null)
             {
-                List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterTodos(start, limit)).ToList();
+                var clienteViewModel = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(Guid.Parse(data)));
 
-                clientes.Remove(clientes.LastOrDefault());
+                //List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterPorFiltro(start, limit, query)).ToList();
 
-                clientes.Add(_mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(Guid.Parse(query))));
-                
+                var totalRegistros = await _clienteRepository.TotalRegistros();
+
+                return Json(new
+                {
+                    data = clienteViewModel,
+                    total = totalRegistros,
+                    success = true
+                });
+            }
+            if (query != null)
+            {
+                List<ClienteViewModel> clientes = _mapper.Map<IEnumerable<ClienteViewModel>>(await _clienteRepository.ObterPorFiltro(start, limit, query)).ToList();
+
                 var totalRegistros = await _clienteRepository.TotalRegistros();
 
                 return Json(new
                 {
                     data = clientes,
                     total = totalRegistros,
-                    success = true
-                });
-            }
-            if (data != null && query == null)
-            {
-                Guid id = Guid.Parse(data);
-
-                ClienteViewModel cliente = _mapper.Map<ClienteViewModel>(await _clienteRepository.ObterPorId(id));
-
-                return Json(new
-                {
-                    data = cliente,
                     success = true
                 });
             }
@@ -96,18 +95,23 @@ namespace PostoGasolina.App.Controllers
         public async Task<IActionResult> SaveCliente(string data)
         {
             var clienteViewModel = JsonConvert.DeserializeObject<ClienteViewModel>(data);
-
+            
             if (ModelState.IsValid)
             {
                 var cliente = _mapper.Map<Cliente>(clienteViewModel);
 
                 await _clienteService.Adicionar(cliente);
-            }
 
-            return Json(new
-            {
-                success = true
-            });
+                if (!OperacaoValida())
+                {
+                    var msg = Notificacoes();
+
+                    if (msg.Count > 0) return Json(new { success = false, data = msg });
+                }
+            } 
+           
+            return Json(new {success = true});
+
         }
 
         [HttpPost]
@@ -120,12 +124,16 @@ namespace PostoGasolina.App.Controllers
                 var cliente = _mapper.Map<Cliente>(clienteViewModel);
 
                 await _clienteService.Atualizar(cliente);
+
+                if (!OperacaoValida())
+                {
+                    var msg = Notificacoes();
+
+                    if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+                }
             }
 
-            return Json(new
-            {
-                success = true
-            });
+            return Json(new { success = true });
         }
 
        [HttpPost]
@@ -142,10 +150,14 @@ namespace PostoGasolina.App.Controllers
 
             await _clienteService.Remover(clienteViewModel.Id);
 
-            return Json(new
+            if (!OperacaoValida())
             {
-                success = true
-            });
+                var msg = Notificacoes();
+
+                if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+            }
+
+            return Json(new { success = true });
         }
     }
 }

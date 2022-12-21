@@ -1,5 +1,6 @@
 ﻿using PostoGasolina.Business.Interfaces;
 using PostoGasolina.Business.Models;
+using PostoGasolina.Business.Models.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,28 +11,55 @@ namespace PostoGasolina.Business.Services
 {
     public class AbastecimentoService : BaseService, IAbastecimentoService
     {
-        public AbastecimentoService(INotificador notificador) : base(notificador)
+
+        private readonly IAbastecimentoRepository _abastecimentoRepository;
+
+        public AbastecimentoService(IAbastecimentoRepository abastecimentoRepository,
+                                    INotificador notificador) : base(notificador)
         {
+            _abastecimentoRepository = abastecimentoRepository;
         }
 
-        public Task Adicionar(Abastecimento abastecimento)
+        public async Task Adicionar(Abastecimento abastecimento)
         {
-            throw new NotImplementedException();
+           
+            if (!ExecutarValidacao(new AbastecimentoValidation(), abastecimento)) return;
+
+            abastecimento.DataAbastecimento = abastecimento.DataAbastecimento.Value.ToUniversalTime();
+           
+            if (_abastecimentoRepository.Buscar(a => a.DataAbastecimento == abastecimento.DataAbastecimento && a.VeiculoId == abastecimento.VeiculoId, 1, 25).Result.Any())
+            {
+                Notificar("Já existe um abastecimento com a mesma data para o veículo selecionado");
+                return;
+            }
+
+            await _abastecimentoRepository.Adicionar(abastecimento);
         }
 
-        public Task Atualizar(Abastecimento abastecimento)
+        public async Task Atualizar(Abastecimento abastecimento)
         {
-            throw new NotImplementedException();
+
+            if (!ExecutarValidacao(new AbastecimentoValidation(), abastecimento)) return;
+
+            abastecimento.DataAbastecimento = abastecimento.DataAbastecimento.Value.ToUniversalTime();
+
+            if (_abastecimentoRepository.Buscar(a => a.DataAbastecimento == abastecimento.DataAbastecimento && a.VeiculoId == abastecimento.VeiculoId, 1, 25).Result.Any())
+            {
+                Notificar("Já existe um abastecimento com a mesma data para o veículo selecionado");
+                return;
+            }
+
+            await _abastecimentoRepository.Atualizar(abastecimento);
         }
 
-       public Task Remover(Guid id)
+       public async Task Remover(Guid id)
         {
-            throw new NotImplementedException();
+          await _abastecimentoRepository.Remover(id);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _abastecimentoRepository?.Dispose();
         }
     }
 }

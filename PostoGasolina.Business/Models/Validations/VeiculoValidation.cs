@@ -8,19 +8,22 @@ namespace PostoGasolina.Business.Models.Validations
         public VeiculoValidation()
         {
             RuleFor(v => v.Modelo)
-                .NotEmpty().WithMessage("o campo {PropertyName} precisa ser fornecido");
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
+
+            RuleFor(v => v.Marca)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
 
             RuleFor(v => v.Ano)
-                .NotEmpty().WithMessage("o campo {PropertyName} precisa ser fornecido");
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
                 
             RuleFor(v => v.Placa)
-                .NotEmpty().WithMessage("o campo {PropertyName} precisa ser fornecido");
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
 
             RuleFor(v => v.TipoCombustivelId)
-                .NotEmpty().WithMessage("É necessário informar o tipo do combustível");
+                .NotNull().WithMessage("O campo Tipo de Combustível precisa ser fornecido");
 
             RuleFor(v => v.ClienteId)
-                .NotEmpty().WithMessage("É necessário informar o cliente");
+                .NotEmpty().WithMessage("O campo Cliente precisa ser fornecido");
         }
     }
 }

@@ -28,11 +28,6 @@ namespace PostoGasolina.Infra.Repository
             return await DbSet.FindAsync(id);
         }
 
-         public Task<TEntity> ObterPorFiltro(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<TEntity>> ObterTodos(int start, int limit)
         {
             return
@@ -56,7 +51,7 @@ namespace PostoGasolina.Infra.Repository
                                 .Take(limit)
                                 .ToListAsync();
         }
-       
+
         public virtual async Task Adicionar(TEntity entity)
         {
             DbSet.Add(entity);

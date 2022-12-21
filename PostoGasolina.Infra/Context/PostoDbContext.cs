@@ -22,7 +22,6 @@ namespace PostoGasolina.Infra.Context
 
         public DbSet<Abastecimento> Abastecimentos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
-        //public DbSet<Combustivel> Combustiveis  { get; set; }
         public DbSet<Veiculo> Veiculos  { get; set; }
 
 

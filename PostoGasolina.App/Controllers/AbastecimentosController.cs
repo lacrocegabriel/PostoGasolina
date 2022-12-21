@@ -16,16 +16,21 @@ using PostoGasolina.Business.Interfaces;
 
 namespace PostoGasolina.App.Controllers
 {
-    public class AbastecimentosController : Controller
+    public class AbastecimentosController : BaseController
     {
         private readonly IAbastecimentoRepository _abastecimentoRepository;
+        private readonly IAbastecimentoService _abastecimentoService;
         private readonly IMapper _mapper;
 
-        public AbastecimentosController(IAbastecimentoRepository abastecimentoRepository, 
-                                        IMapper mapper)
+        public AbastecimentosController(IAbastecimentoRepository abastecimentoRepository,
+                                        IAbastecimentoService abastecimentoService,
+                                        IMapper mapper,
+                                         INotificador notificador) : base(notificador)
         {
             _abastecimentoRepository = abastecimentoRepository;
+            _abastecimentoService = abastecimentoService;
             _mapper = mapper;
+            
         }
 
         public async Task<IActionResult> GetGridAbastecimentos(int start, int limit)
@@ -46,59 +51,67 @@ namespace PostoGasolina.App.Controllers
         public async Task<IActionResult> SaveAbastecimento(string data)
         {
 
-            var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
-
             if (ModelState.IsValid)
             {
-                var abastecimento = _mapper.Map<Abastecimento>(json);
+                var abastecimento = _mapper.Map<Abastecimento>(JsonConvert.DeserializeObject<AbastecimentoViewModel>(data));
 
-                await _abastecimentoRepository.Adicionar(abastecimento);
+                await _abastecimentoService.Adicionar(abastecimento);
+
+                if (!OperacaoValida())
+                {
+                    var msg = Notificacoes();
+
+                    if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+                }
             }
 
-            return Json(new
-            {
-                success = true
-            });
+            return Json(new { success = true });
         }
 
         [HttpPost]
         public async Task<IActionResult> EditAbastecimento(string data)
         {
 
-            var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
-
             if (ModelState.IsValid)
             {
-                var abastecimento = _mapper.Map<Abastecimento>(json);    
+                var abastecimento = _mapper.Map<Abastecimento>(JsonConvert.DeserializeObject<AbastecimentoViewModel>(data));
 
-                await _abastecimentoRepository.Atualizar(abastecimento);
+                await _abastecimentoService.Atualizar(abastecimento);
+
+                if (!OperacaoValida())
+                {
+                    var msg = Notificacoes();
+
+                    if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+                }
             }
-            
-            return Json(new
-            {
-                success = true
-            });
+
+            return Json(new { success = true });
         }
 
        [HttpPost]
         public async Task<IActionResult> DeleteAbastecimento(string data)
         {
 
-            var json = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
+            var abastecimento = JsonConvert.DeserializeObject<AbastecimentoViewModel>(data);
 
-            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(json.Id));
+            var abastecimentoViewModel = _mapper.Map<AbastecimentoViewModel>(await _abastecimentoRepository.ObterPorId(abastecimento.Id));
 
             if (abastecimentoViewModel == null)
             {
                 return NotFound();
             }
 
-            await _abastecimentoRepository.Remover(json.Id);
+            await _abastecimentoRepository.Remover(abastecimento.Id);
 
-            return Json(new
+            if (!OperacaoValida())
             {
-                success = true
-            });
+                var msg = Notificacoes();
+
+                if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+            }
+            
+            return Json(new { success = true });
         }
 
     }

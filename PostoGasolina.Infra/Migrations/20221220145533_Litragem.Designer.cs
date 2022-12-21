@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PostoGasolina.Infra.Context;
 
 namespace PostoGasolina.Infra.Migrations
 {
     [DbContext(typeof(PostoDbContext))]
-    partial class PostoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221220145533_Litragem")]
+    partial class Litragem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +34,8 @@ namespace PostoGasolina.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Litragem")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<long>("Litragem")
+                        .HasColumnType("BIGINT");
 
                     b.Property<int>("TipoCombustivelId")
                         .HasColumnType("int");

@@ -8,16 +8,16 @@ namespace PostoGasolina.Business.Models.Validations
         public AbastecimentoValidation()
         {
             RuleFor(a => a.Litragem)
-                .NotEmpty().WithMessage("o campo {PropertyName} precisa ser fornecido");
+                .NotEmpty().WithMessage("A litragem abastecida precisa ser fornecida");
 
             RuleFor(a => a.ValorLitro)
-                .NotEmpty().WithMessage("o campo {PropertyName} precisa ser fornecido");
+                .NotEmpty().WithMessage("O valor do litro precisa ser fornecido");
                 
             RuleFor(a => a.DataAbastecimento)
-                .NotEmpty().WithMessage("o campo {PropertyName} precisa ser fornecido");
+                .NotEmpty().WithMessage("A data de abastecimento precisa ser informada");
 
             RuleFor(a => a.TipoCombustivelId)
-                .NotEmpty().WithMessage("É necessário informar o tipo do combustível");
+                .NotNull().WithMessage("É necessário informar o tipo do combustível");
 
             RuleFor(a => a.ClienteId)
                 .NotEmpty().WithMessage("É necessário informar o cliente");

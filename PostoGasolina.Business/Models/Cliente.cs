@@ -7,7 +7,7 @@ namespace PostoGasolina.Business.Models
     {
         public string Nome { get; set; }
         public string Documento { get; set; }
-        public DateTime DataCadastro { get; set; }
+        public DateTime? DataCadastro { get; set; }
         public IEnumerable<Veiculo> Veiculos { get; set; }
         public IEnumerable<Abastecimento> Abastecimentos { get; set; }
         public bool Ativo { get; set; }

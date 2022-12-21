@@ -14,16 +14,20 @@ using PostoGasolina.Business.Interfaces;
 
 namespace PostoGasolina.App.Controllers
 {
-    public class VeiculosController : Controller
+    public class VeiculosController : BaseController
     {
         private readonly IVeiculoRepository _veiculoRepository;
+        private readonly IVeiculoService _veiculoService;
         private readonly IMapper _mapper;
 
         public VeiculosController(IVeiculoRepository veiculoRepository, 
-                                  IMapper mapper)
+                                  IMapper mapper,
+                                  IVeiculoService veiculoService,
+                                  INotificador notificador) : base(notificador)
         {
             _veiculoRepository = veiculoRepository;
             _mapper = mapper;
+            _veiculoService = veiculoService;
         }
 
         public async Task<IActionResult> GetGridVeiculos(string data, int start, int limit, string query)
@@ -95,13 +99,17 @@ namespace PostoGasolina.App.Controllers
             {
                 var veiculo = _mapper.Map<Veiculo>(veiculoViewModel);
 
-                await _veiculoRepository.Adicionar(veiculo);
+                await _veiculoService.Adicionar(veiculo);
+
+                if (!OperacaoValida())
+                {
+                    var msg = Notificacoes();
+
+                    if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+                }
             }
 
-            return Json(new
-            {
-                success = true
-            });
+            return Json(new { success = true });
         }
 
         [HttpPost]
@@ -113,13 +121,17 @@ namespace PostoGasolina.App.Controllers
             {
                 var veiculo = _mapper.Map<Veiculo>(veiculoViewModel);
 
-                await _veiculoRepository.Atualizar(veiculo);
+                await _veiculoService.Atualizar(veiculo);
+
+                if (!OperacaoValida())
+                {
+                    var msg = Notificacoes();
+
+                    if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+                }
             }
 
-            return Json(new
-            {
-                success = true
-            });
+            return Json(new { success = true });
         }
 
         [HttpPost]
@@ -134,12 +146,16 @@ namespace PostoGasolina.App.Controllers
                 return NotFound();
             }
 
-            await _veiculoRepository.Remover(result.Id);
+            await _veiculoService.Remover(result.Id);
 
-            return Json(new
+            if (!OperacaoValida())
             {
-                success = true
-            });
+                var msg = Notificacoes();
+
+                if (msg.Count > 0) return Json(new { success = false, data = msg.FirstOrDefault() });
+            }
+
+            return Json(new { success = true });
         }
 
     }

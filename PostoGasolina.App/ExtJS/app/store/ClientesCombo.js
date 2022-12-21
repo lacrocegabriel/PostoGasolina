@@ -15,15 +15,16 @@
             type: 'json',
             root: 'data'
         }
-    },
-    listeners: {
-        beforeload: function (store, operation, eOpts) {
-
-            var comboc = Ext.ComponentQuery.query('combo#cbcliente')[0];
-
-            operation.params.query = comboc.value;
-
-        }
     }
+    //,
+    //listeners: {
+    //    beforeload: function (store, operation, eOpts) {
+
+    //        var comboc = Ext.ComponentQuery.query('combo#cbcliente')[0];
+
+    //        operation.params.query = comboc.value;
+
+    //    }
+    //}
 });
 

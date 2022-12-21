@@ -52,5 +52,6 @@ namespace PostoGasolina.Infra.Repository
                 .Take(limit)
                 .ToListAsync();
         }
+
     }
 }
